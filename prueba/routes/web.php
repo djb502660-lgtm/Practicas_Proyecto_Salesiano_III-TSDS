@@ -34,3 +34,8 @@ Route::middleware(['auth'])->group(function (): void {
     });
 });
 
+Route::prefix('psicologia')->name('psicologia.')->group(function () {
+    Route::get('/perfil', [\App\Http\Controllers\modulo_psicologia\PerfilController::class, 'index'])->name('perfil');
+});
+
+
