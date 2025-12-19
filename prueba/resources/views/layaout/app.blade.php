@@ -49,11 +49,11 @@
                     </li>
 
                     @auth
-                    <!-- Usuarios -->
+                    <!-- M01 - Usuarios -->
                     <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.users.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user" style="color: #dc3545;"></i>
-                            <div data-i18n="Usuarios" style="color: #000000;">Usuarios</div>
+                            <div data-i18n="Usuarios" style="color: #000000;">Usuarios (M01)</div>
                         </a>
                     </li>
 
@@ -61,23 +61,47 @@
                     <li class="menu-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.roles.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-shield" style="color: #dc3545;"></i>
-                            <div data-i18n="Roles" style="color: #000000;">Roles</div>
+                            <div data-i18n="Roles" style="color: #000000;">Roles y Permisos</div>
                         </a>
                     </li>
 
-                    <!-- Afiliados -->
+                    <!-- M04 - Afiliados (Ficha de registro) -->
                     <li class="menu-item {{ request()->routeIs('admin.afiliados.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.afiliados.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-group" style="color: #dc3545;"></i>
-                            <div data-i18n="Afiliados" style="color: #000000;">Afiliados</div>
+                            <div data-i18n="Afiliados" style="color: #000000;">Afiliados (M04)</div>
                         </a>
                     </li>
 
-                    <!-- Mediciones -->
+                    <!-- M02 - Comedor/MCI - Mediciones -->
                     <li class="menu-item {{ request()->routeIs('admin.mediciones.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.mediciones.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-line-chart" style="color: #dc3545;"></i>
-                            <div data-i18n="Mediciones" style="color: #000000;">Mediciones</div>
+                            <div data-i18n="Mediciones" style="color: #000000;">Mediciones (M02)</div>
+                        </a>
+                    </li>
+
+                    <!-- M02 - Registros Nutricionales -->
+                    <li class="menu-item {{ request()->routeIs('nutritional-records.*') ? 'active' : '' }}">
+                        <a href="{{ route('nutritional-records.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-food-menu" style="color: #dc3545;"></i>
+                            <div data-i18n="Registros Nutricionales" style="color: #000000;">Registros Nutricionales</div>
+                        </a>
+                    </li>
+
+                    <!-- M03 - Psicología -->
+                    <li class="menu-item {{ request()->routeIs('psychological-records.*') ? 'active' : '' }}">
+                        <a href="{{ route('psychological-records.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-brain" style="color: #dc3545;"></i>
+                            <div data-i18n="Psicología" style="color: #000000;">Psicología (M03)</div>
+                        </a>
+                    </li>
+
+                    <!-- Reportes -->
+                    <li class="menu-item {{ request()->routeIs('reports.*') ? 'active' : '' }}">
+                        <a href="{{ route('reports.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-bar-chart-alt-2" style="color: #dc3545;"></i>
+                            <div data-i18n="Reportes" style="color: #000000;">Reportes</div>
                         </a>
                     </li>
                     @endauth

@@ -1,0 +1,55 @@
+═══════════════════════════════════════════════════════════════
+    COMANDOS RÁPIDOS PARA VISUALIZAR EL SISTEMA
+═══════════════════════════════════════════════════════════════
+
+1. Abre PowerShell o Terminal en la carpeta del proyecto:
+   cd C:\laragon\www\Practicas_Proyecto_Salesiano_III-TSDS\prueba
+
+2. Crea el archivo .env (si no existe):
+   copy .env.example .env
+   (Si no existe .env.example, crea .env manualmente con la configuración básica)
+
+3. Genera la clave de aplicación:
+   php artisan key:generate
+
+4. Crea la base de datos en Laragon:
+   - Abre HeidiSQL o phpMyAdmin desde Laragon
+   - Crea una BD llamada: salesiano_db
+
+5. Ejecuta migraciones:
+   php artisan migrate
+
+6. Crea roles y usuario admin:
+   php artisan db:seed --class=RolesAndPermissionsSeeder
+
+7. Si falta Spatie Permission:
+   composer require spatie/laravel-permission
+   php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+   php artisan migrate
+
+8. Inicia el servidor:
+   php artisan serve
+
+9. Abre en el navegador:
+   http://127.0.0.1:8000
+
+10. Credenciales:
+    Email: admin@salesiano.edu
+    Contraseña: admin123
+
+═══════════════════════════════════════════════════════════════
+                  SI HAY ERRORES, EJECUTA:
+═══════════════════════════════════════════════════════════════
+
+Limpiar caché:
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+
+Ver errores:
+- Revisa: storage/logs/laravel.log
+- O ejecuta: php artisan about
+
+═══════════════════════════════════════════════════════════════
+

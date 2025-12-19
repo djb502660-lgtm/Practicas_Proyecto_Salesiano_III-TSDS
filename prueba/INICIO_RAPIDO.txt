@@ -1,0 +1,72 @@
+═══════════════════════════════════════════════════════════════
+    SISTEMA DE GESTIÓN SALESIANO - GUÍA DE INICIO RÁPIDO
+═══════════════════════════════════════════════════════════════
+
+PASO 1: Verificar que Laragon esté corriendo
+   ✓ Apache/Nginx debe estar activo (botón verde)
+   ✓ MySQL debe estar activo (botón verde)
+
+PASO 2: Crear la base de datos
+   1. Abre Laragon → MySQL → HeidiSQL (o phpMyAdmin)
+   2. Crea una base de datos llamada: salesiano_db
+
+PASO 3: Abrir terminal en la carpeta del proyecto
+   cd C:\laragon\www\Practicas_Proyecto_Salesiano_III-TSDS\prueba
+
+PASO 4: Verificar/Crear archivo .env
+   Si no existe .env, cópialo desde .env.example:
+   copy .env.example .env
+
+   Edita .env y configura:
+   DB_DATABASE=salesiano_db
+   DB_USERNAME=root
+   DB_PASSWORD= (vacío por defecto en Laragon)
+
+PASO 5: Instalar dependencias y configurar
+   composer install
+   php artisan key:generate
+
+PASO 6: Ejecutar migraciones y seeders
+   php artisan migrate
+   php artisan db:seed --class=RolesAndPermissionsSeeder
+
+PASO 7: Iniciar servidor
+
+   OPCIÓN A - Usar Laragon (Recomendado):
+   - El proyecto debería estar disponible automáticamente en:
+     http://practicas_proyecto_salesiano_iii-tsds.test
+   - O en: http://localhost/practicas_proyecto_salesiano_iii-tsds/prueba/public
+
+   OPCIÓN B - Usar servidor de Laravel:
+   php artisan serve
+   - Accede en: http://127.0.0.1:8000
+
+PASO 8: Acceder al sistema
+   URL: http://127.0.0.1:8000 (si usas artisan serve)
+   O la URL configurada en Laragon
+
+   CREDENCIALES:
+   Email: admin@salesiano.edu
+   Contraseña: admin123
+
+═══════════════════════════════════════════════════════════════
+                    SOLUCIÓN DE PROBLEMAS
+═══════════════════════════════════════════════════════════════
+
+❌ Error: "No application encryption key"
+   Solución: php artisan key:generate
+
+❌ Error: "Unknown database"
+   Solución: Crea la BD 'salesiano_db' en Laragon
+
+❌ Error: "Class Spatie\Permission not found"
+   Solución: composer require spatie/laravel-permission
+
+❌ Error 404 en las rutas
+   Solución: php artisan route:clear && php artisan cache:clear
+
+❌ Error de permisos en storage
+   Solución: Asegúrate de que la carpeta storage tenga permisos de escritura
+
+═══════════════════════════════════════════════════════════════
+
