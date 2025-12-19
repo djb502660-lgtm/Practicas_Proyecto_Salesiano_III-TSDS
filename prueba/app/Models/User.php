@@ -104,7 +104,7 @@ class User extends Authenticatable
             $role = Role::where('slug', $role)->firstOrFail();
         }
 
-        if (! $this->hasRole($role->slug)) {
+        if (!$this->hasRole($role->slug)) {
             $this->roles()->attach($role);
         }
     }
@@ -135,5 +135,29 @@ class User extends Authenticatable
         })->toArray();
 
         $this->roles()->sync($roleIds);
+    }
+
+    /**
+     * Get the afiliados registered by the user.
+     */
+    public function afiliados(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Afiliado::class);
+    }
+
+    /**
+     * Get the mediciones registered by the user.
+     */
+    public function mediciones(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Medicion::class);
+    }
+
+    /**
+     * Check if the user has any associated activity.
+     */
+    public function hasActivity(): bool
+    {
+        return $this->afiliados()->exists() || $this->mediciones()->exists();
     }
 }

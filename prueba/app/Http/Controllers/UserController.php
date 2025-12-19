@@ -104,6 +104,11 @@ class UserController extends Controller
      */
     public function destroy(User $user): RedirectResponse
     {
+        if ($user->hasActivity()) {
+            return redirect()->back()
+                ->with('error', 'No se puede eliminar el usuario porque tiene registros asociados (Afiliados o Mediciones).');
+        }
+
         $user->delete();
 
         return redirect()->route('admin.users.index')
