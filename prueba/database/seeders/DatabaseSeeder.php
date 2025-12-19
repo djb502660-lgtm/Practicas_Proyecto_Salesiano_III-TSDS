@@ -16,8 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            RolesAndPermissionsSeeder::class, // Roles del sistema Salesiano
-            // RolePermissionSeeder::class, // Deshabilitado - usar RolesAndPermissionsSeeder
+            RolePermissionSeeder::class,
             AfiliadoSeeder::class,
             AfiliadoMenorSeeder::class,
             MedicionSeeder::class,

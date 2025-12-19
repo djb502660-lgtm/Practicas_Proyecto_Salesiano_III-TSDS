@@ -6,12 +6,8 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Muestra la página principal del sistema
-     */
     public function index()
     {
         return view('home.home');
     }
 }
-
