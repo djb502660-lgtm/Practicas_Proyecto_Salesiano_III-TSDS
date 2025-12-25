@@ -116,6 +116,14 @@ class Afiliado extends Model
     }
 
     /**
+     * Get the psychology records for the afiliado.
+     */
+    public function psicologias(): HasMany
+    {
+        return $this->hasMany(Psicologia::class);
+    }
+
+    /**
      * Get the latest medicion for the afiliado.
      */
     public function ultimaMedicion(): ?Medicion
