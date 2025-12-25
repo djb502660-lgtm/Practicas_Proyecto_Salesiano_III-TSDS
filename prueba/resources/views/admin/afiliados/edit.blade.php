@@ -311,11 +311,6 @@
                                     <div class="col-md-4 mb-3">
                                         <label for="tipo_seguro_salud" class="form-label" style="color: #000000;">Tipo de Seguro de Salud</label>
                                         <input type="text" class="form-control" id="tipo_seguro_salud" name="tipo_seguro_salud" value="{{ old('tipo_seguro_salud', $afiliado->tipo_seguro_salud) }}" style="border: 1px solid #808080; color: #000000;">
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="eps" class="form-label" style="color: #000000;">EPS</label>
-                                        <input type="text" class="form-control" id="eps" name="eps" value="{{ old('eps', $afiliado->eps) }}" style="border: 1px solid #808080; color: #000000;">
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 mb-3">

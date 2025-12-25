@@ -202,13 +202,6 @@
                                     <div class="col-md-3" style="color: #000000;">{{ $afiliado->tipo_seguro_salud }}</div>
                                 @endif
                             </div>
-                            @if($afiliado->eps)
-                                <hr style="border-color: #808080;">
-                                <div class="row">
-                                    <div class="col-md-3"><strong style="color: #000000;">EPS:</strong></div>
-                                    <div class="col-md-9" style="color: #000000;">{{ $afiliado->eps }}</div>
-                                </div>
-                            @endif
                             @if($afiliado->condiciones_medicas)
                                 <hr style="border-color: #808080;">
                                 <div class="row">
