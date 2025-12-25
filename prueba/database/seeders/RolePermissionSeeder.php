@@ -67,6 +67,14 @@ class RolePermissionSeeder extends Seeder
             ['name' => 'Editar Mediciones', 'slug' => 'mediciones.edit', 'description' => 'Permite editar mediciones existentes'],
             ['name' => 'Eliminar Mediciones', 'slug' => 'mediciones.delete', 'description' => 'Permite eliminar mediciones'],
 
+            // Permisos de Psicologia
+            ['name' => 'Ver Psicologia', 'slug' => 'psicologia.view', 'description' => 'Permite ver la lista de registros de psicologia'],
+            ['name' => 'Crear Psicologia', 'slug' => 'psicologia.create', 'description' => 'Permite crear nuevos registros de psicologia'],
+            ['name' => 'Editar Psicologia', 'slug' => 'psicologia.edit', 'description' => 'Permite editar registros de psicologia'],
+            ['name' => 'Eliminar Psicologia', 'slug' => 'psicologia.delete', 'description' => 'Permite eliminar registros de psicologia'],
+            ['name' => 'Ver Alertas de Psicologia', 'slug' => 'psicologia-alertas.view', 'description' => 'Permite ver alertas de psicologia'],
+            ['name' => 'Ver Reportes de Psicologia', 'slug' => 'psicologia-reportes.view', 'description' => 'Permite ver reportes de psicologia'],
+
             // Permisos del Dashboard
             ['name' => 'Acceder al Dashboard', 'slug' => 'dashboard.access', 'description' => 'Permite acceder al panel de control'],
         ];
@@ -122,6 +130,11 @@ class RolePermissionSeeder extends Seeder
             $permissions['mediciones.view']->id,
             $permissions['mediciones.create']->id,
             $permissions['mediciones.edit']->id,
+            $permissions['psicologia.view']->id,
+            $permissions['psicologia.create']->id,
+            $permissions['psicologia.edit']->id,
+            $permissions['psicologia-alertas.view']->id,
+            $permissions['psicologia-reportes.view']->id,
             $permissions['dashboard.access']->id,
         ]);
         $this->command->info("  ✓ Rol creado: {$editorRole->name}");
@@ -148,6 +161,12 @@ class RolePermissionSeeder extends Seeder
             $permissions['mediciones.create']->id,
             $permissions['mediciones.edit']->id,
             $permissions['mediciones.delete']->id,
+            $permissions['psicologia.view']->id,
+            $permissions['psicologia.create']->id,
+            $permissions['psicologia.edit']->id,
+            $permissions['psicologia.delete']->id,
+            $permissions['psicologia-alertas.view']->id,
+            $permissions['psicologia-reportes.view']->id,
             $permissions['dashboard.access']->id,
         ]);
         $this->command->info("  ✓ Rol creado: {$moderatorRole->name}");
@@ -164,6 +183,8 @@ class RolePermissionSeeder extends Seeder
             $permissions['users.view']->id,
             $permissions['afiliados.view']->id,
             $permissions['mediciones.view']->id,
+            $permissions['psicologia.view']->id,
+            $permissions['psicologia-reportes.view']->id,
             $permissions['dashboard.access']->id,
         ]);
         $this->command->info("  ✓ Rol creado: {$userRole->name}");
