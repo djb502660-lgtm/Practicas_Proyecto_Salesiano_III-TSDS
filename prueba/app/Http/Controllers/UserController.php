@@ -18,7 +18,17 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $users = User::with('roles')->latest()->paginate(15);
+        $users = User::with('roles')
+            ->select('users.*')
+            ->leftJoin('role_user', 'users.id', '=', 'role_user.user_id')
+            ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
+            ->orderByRaw("CASE 
+                WHEN roles.slug = 'director' THEN 1 
+                WHEN roles.slug = 'coordinador' THEN 2 
+                WHEN roles.slug = 'educador' THEN 3 
+                ELSE 4 END")
+            ->distinct()
+            ->paginate(15);
 
         return view('admin.users.index', compact('users'));
     }

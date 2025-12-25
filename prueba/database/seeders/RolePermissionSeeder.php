@@ -92,49 +92,26 @@ class RolePermissionSeeder extends Seeder
      */
     private function createRoles(array $permissions): array
     {
-        // Rol Administrador - Todos los permisos
-        $adminRole = Role::updateOrCreate(
-            ['slug' => 'admin'],
+        // Rol Director - Todos los permisos
+        $directorRole = Role::updateOrCreate(
+            ['slug' => 'director'],
             [
-                'name' => 'Administrador',
+                'name' => 'Director',
                 'description' => 'Rol con todos los permisos del sistema. Acceso completo.',
             ]
         );
-        $adminRole->permissions()->sync(array_column($permissions, 'id'));
-        $this->command->info("  ✓ Rol creado: {$adminRole->name} (con todos los permisos)");
+        $directorRole->permissions()->sync(array_column($permissions, 'id'));
+        $this->command->info("  ✓ Rol creado: {$directorRole->name} (con todos los permisos)");
 
-        // Rol Editor - Permisos de visualización y edición limitada
-        $editorRole = Role::updateOrCreate(
-            ['slug' => 'editor'],
+        // Rol Coordinador - Permisos intermedios
+        $coordinadorRole = Role::updateOrCreate(
+            ['slug' => 'coordinador'],
             [
-                'name' => 'Editor',
-                'description' => 'Rol con permisos de visualización y edición limitada.',
+                'name' => 'Coordinador',
+                'description' => 'Rol con permisos de coordinación y gestión básica.',
             ]
         );
-        $editorRole->permissions()->sync([
-            $permissions['users.view']->id,
-            $permissions['users.edit']->id,
-            $permissions['roles.view']->id,
-            $permissions['permissions.view']->id,
-            $permissions['afiliados.view']->id,
-            $permissions['afiliados.create']->id,
-            $permissions['afiliados.edit']->id,
-            $permissions['mediciones.view']->id,
-            $permissions['mediciones.create']->id,
-            $permissions['mediciones.edit']->id,
-            $permissions['dashboard.access']->id,
-        ]);
-        $this->command->info("  ✓ Rol creado: {$editorRole->name}");
-
-        // Rol Moderador - Permisos intermedios
-        $moderatorRole = Role::updateOrCreate(
-            ['slug' => 'moderator'],
-            [
-                'name' => 'Moderador',
-                'description' => 'Rol con permisos de moderación y gestión básica.',
-            ]
-        );
-        $moderatorRole->permissions()->sync([
+        $coordinadorRole->permissions()->sync([
             $permissions['users.view']->id,
             $permissions['users.edit']->id,
             $permissions['users.assign-roles']->id,
@@ -150,29 +127,30 @@ class RolePermissionSeeder extends Seeder
             $permissions['mediciones.delete']->id,
             $permissions['dashboard.access']->id,
         ]);
-        $this->command->info("  ✓ Rol creado: {$moderatorRole->name}");
+        $this->command->info("  ✓ Rol creado: {$coordinadorRole->name}");
 
-        // Rol Usuario - Solo visualización básica
-        $userRole = Role::updateOrCreate(
-            ['slug' => 'usuario'],
+        // Rol Educador - Solo visualización básica
+        $educadorRole = Role::updateOrCreate(
+            ['slug' => 'educador'],
             [
-                'name' => 'Usuario',
-                'description' => 'Rol básico de usuario con permisos de solo lectura.',
+                'name' => 'Educador',
+                'description' => 'Rol básico de educador con permisos de lectura y registro de datos.',
             ]
         );
-        $userRole->permissions()->sync([
+        $educadorRole->permissions()->sync([
             $permissions['users.view']->id,
             $permissions['afiliados.view']->id,
+            $permissions['afiliados.create']->id,
             $permissions['mediciones.view']->id,
+            $permissions['mediciones.create']->id,
             $permissions['dashboard.access']->id,
         ]);
-        $this->command->info("  ✓ Rol creado: {$userRole->name}");
+        $this->command->info("  ✓ Rol creado: {$educadorRole->name}");
 
         return [
-            'admin' => $adminRole,
-            'editor' => $editorRole,
-            'moderator' => $moderatorRole,
-            'usuario' => $userRole,
+            'director' => $directorRole,
+            'coordinador' => $coordinadorRole,
+            'educador' => $educadorRole,
         ];
     }
 
@@ -183,52 +161,40 @@ class RolePermissionSeeder extends Seeder
      */
     private function createUsers(array $roles): void
     {
-        // Usuario Administrador
-        $adminUser = User::updateOrCreate(
-            ['email' => 'admin@example.com'],
+        // Usuario Director
+        $directorUser = User::updateOrCreate(
+            ['email' => 'director@example.com'],
             [
-                'name' => 'Administrador',
+                'name' => 'Director',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
             ]
         );
-        $adminUser->syncRoles([$roles['admin']->id]);
-        $this->command->info("  ✓ Usuario creado: {$adminUser->name} ({$adminUser->email}) - Contraseña: password");
+        $directorUser->syncRoles([$roles['director']->id]);
+        $this->command->info("  ✓ Usuario creado: {$directorUser->name} ({$directorUser->email}) - Contraseña: password");
 
-        // Usuario Editor
-        $editorUser = User::updateOrCreate(
-            ['email' => 'editor@example.com'],
+        // Usuario Coordinador
+        $coordinadorUser = User::updateOrCreate(
+            ['email' => 'coordinador@example.com'],
             [
-                'name' => 'Editor',
+                'name' => 'Coordinador',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
             ]
         );
-        $editorUser->syncRoles([$roles['editor']->id]);
-        $this->command->info("  ✓ Usuario creado: {$editorUser->name} ({$editorUser->email}) - Contraseña: password");
+        $coordinadorUser->syncRoles([$roles['coordinador']->id]);
+        $this->command->info("  ✓ Usuario creado: {$coordinadorUser->name} ({$coordinadorUser->email}) - Contraseña: password");
 
-        // Usuario Moderador
-        $moderatorUser = User::updateOrCreate(
-            ['email' => 'moderator@example.com'],
+        // Usuario Educador
+        $educadorUser = User::updateOrCreate(
+            ['email' => 'educador@example.com'],
             [
-                'name' => 'Moderador',
+                'name' => 'Educador',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
             ]
         );
-        $moderatorUser->syncRoles([$roles['moderator']->id]);
-        $this->command->info("  ✓ Usuario creado: {$moderatorUser->name} ({$moderatorUser->email}) - Contraseña: password");
-
-        // Usuario Regular
-        $regularUser = User::updateOrCreate(
-            ['email' => 'usuario@example.com'],
-            [
-                'name' => 'Usuario Regular',
-                'password' => Hash::make('password'),
-                'email_verified_at' => now(),
-            ]
-        );
-        $regularUser->syncRoles([$roles['usuario']->id]);
-        $this->command->info("  ✓ Usuario creado: {$regularUser->name} ({$regularUser->email}) - Contraseña: password");
+        $educadorUser->syncRoles([$roles['educador']->id]);
+        $this->command->info("  ✓ Usuario creado: {$educadorUser->name} ({$educadorUser->email}) - Contraseña: password");
     }
 }
