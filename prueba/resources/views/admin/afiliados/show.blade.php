@@ -27,11 +27,35 @@
                             <h5 style="color: #000000; margin: 0;"><i class="bx bx-user" style="color: #dc3545;"></i> Datos Personales</h5>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3"><strong style="color: #000000;">Nombre Completo:</strong></div>
-                                <div class="col-md-3" style="color: #000000;">{{ $afiliado->nombre_completo }}</div>
-                                <div class="col-md-3"><strong style="color: #000000;">Edad:</strong></div>
-                                <div class="col-md-3" style="color: #000000;">{{ $afiliado->edad }} años</div>
+                            <div class="row align-items-center">
+                                <div class="col-md-3 text-center mb-3">
+                                    <div style="width: 150px; height: 150px; margin: 0 auto; border: 1px solid #808080; border-radius: 10px; overflow: hidden; background-color: #ffffff;">
+                                        @if($afiliado->foto)
+                                            <img src="{{ asset('storage/' . $afiliado->foto) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                        @else
+                                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #f8f9fa;">
+                                                <i class="bx bx-user" style="font-size: 4rem; color: #808080;"></i>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <small class="text-muted d-block mt-2">Expediente Digital</small>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-4"><strong style="color: #000000;">Nombre Completo:</strong></div>
+                                        <div class="col-md-8" style="color: #000000;">{{ $afiliado->nombre_completo }}</div>
+                                    </div>
+                                    <hr style="border-color: #808080; margin: 0.5rem 0;">
+                                    <div class="row">
+                                        <div class="col-md-4"><strong style="color: #000000;">Edad:</strong></div>
+                                        <div class="col-md-8" style="color: #000000;">{{ $afiliado->edad }} años</div>
+                                    </div>
+                                    <hr style="border-color: #808080; margin: 0.5rem 0;">
+                                    <div class="row">
+                                        <div class="col-md-4"><strong style="color: #000000;">Número de Documento:</strong></div>
+                                        <div class="col-md-8" style="color: #000000;">{{ $afiliado->numero_documento }}</div>
+                                    </div>
+                                </div>
                             </div>
                             <hr style="border-color: #808080;">
                             <div class="row">
@@ -50,9 +74,7 @@
                             <hr style="border-color: #808080;">
                             <div class="row">
                                 <div class="col-md-3"><strong style="color: #000000;">Tipo de Documento:</strong></div>
-                                <div class="col-md-3" style="color: #000000;">{{ ucfirst(str_replace('_', ' ', $afiliado->tipo_documento)) }}</div>
-                                <div class="col-md-3"><strong style="color: #000000;">Número de Documento:</strong></div>
-                                <div class="col-md-3" style="color: #000000;">{{ $afiliado->numero_documento }}</div>
+                                <div class="col-md-9" style="color: #000000;">{{ ucfirst(str_replace('_', ' ', $afiliado->tipo_documento)) }}</div>
                             </div>
                         </div>
                     </div>
@@ -138,9 +160,7 @@
                             <hr style="border-color: #808080;">
                             <div class="row">
                                 <div class="col-md-3"><strong style="color: #000000;">Lugar de Trabajo:</strong></div>
-                                <div class="col-md-3" style="color: #000000;">{{ $afiliado->lugar_trabajo ?? 'N/A' }}</div>
-                                <div class="col-md-3"><strong style="color: #000000;">Cargo:</strong></div>
-                                <div class="col-md-3" style="color: #000000;">{{ $afiliado->cargo ?? 'N/A' }}</div>
+                                <div class="col-md-9" style="color: #000000;">{{ $afiliado->lugar_trabajo ?? 'N/A' }}</div>
                             </div>
                             @if($afiliado->ingresos_mensuales)
                                 <hr style="border-color: #808080;">
@@ -202,13 +222,6 @@
                                     <div class="col-md-3" style="color: #000000;">{{ $afiliado->tipo_seguro_salud }}</div>
                                 @endif
                             </div>
-                            @if($afiliado->eps)
-                                <hr style="border-color: #808080;">
-                                <div class="row">
-                                    <div class="col-md-3"><strong style="color: #000000;">EPS:</strong></div>
-                                    <div class="col-md-9" style="color: #000000;">{{ $afiliado->eps }}</div>
-                                </div>
-                            @endif
                             @if($afiliado->condiciones_medicas)
                                 <hr style="border-color: #808080;">
                                 <div class="row">

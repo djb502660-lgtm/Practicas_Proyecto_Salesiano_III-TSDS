@@ -35,8 +35,14 @@ class AfiliadoController extends Controller
      */
     public function store(StoreAfiliadoRequest $request): RedirectResponse
     {
+        $data = $request->validated();
+        
+        if ($request->hasFile('foto')) {
+            $data['foto'] = $request->file('foto')->store('afiliados/fotos', 'public');
+        }
+
         $afiliado = Afiliado::create([
-            ...$request->validated(),
+            ...$data,
             'user_id' => auth()->id(),
         ]);
 
@@ -67,7 +73,17 @@ class AfiliadoController extends Controller
      */
     public function update(UpdateAfiliadoRequest $request, Afiliado $afiliado): RedirectResponse
     {
-        $afiliado->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('foto')) {
+            // Eliminar foto anterior si existe
+            if ($afiliado->foto) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($afiliado->foto);
+            }
+            $data['foto'] = $request->file('foto')->store('afiliados/fotos', 'public');
+        }
+
+        $afiliado->update($data);
 
         return redirect()->route('admin.afiliados.index')
             ->with('success', 'Afiliado actualizado exitosamente.');

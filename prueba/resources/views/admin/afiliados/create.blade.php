@@ -11,7 +11,7 @@
                     <h4 class="mb-0" style="color: #000000;">Crear Nuevo Afiliado</h4>
                 </div>
                 <div class="card-body" style="background-color: #ffffff;">
-                    <form action="{{ route('admin.afiliados.store') }}" method="POST">
+                    <form action="{{ route('admin.afiliados.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Datos Personales -->
@@ -20,10 +20,27 @@
                                 <h5 style="color: #000000; margin: 0;"><i class="bx bx-user" style="color: #dc3545;"></i> Datos Personales</h5>
                             </div>
                             <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-12 text-center">
+                                        <div class="mb-3">
+                                            <label for="foto" class="form-label" style="color: #000000;">Foto del Expediente</label>
+                                            <div class="d-flex justify-content-center">
+                                                <div id="image-preview" style="width: 150px; height: 150px; border: 2px dashed #808080; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #f8f9fa;">
+                                                    <i class="bx bx-image-add" style="font-size: 3rem; color: #808080;"></i>
+                                                </div>
+                                            </div>
+                                            <input type="file" class="form-control mt-2 @error('foto') is-invalid @enderror" id="foto" name="foto" accept="image/*" onchange="previewImage(event)" style="border: 1px solid #808080; color: #000000;">
+                                            @error('foto')
+                                                <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
+                                            @enderror
+                                            <small class="text-muted">Formatos permitidos: JPG, PNG. Máx: 2MB</small>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="primer_nombre" class="form-label" style="color: #000000;">Primer Nombre <span style="color: #dc3545;">*</span></label>
-                                        <input type="text" class="form-control @error('primer_nombre') is-invalid @enderror" id="primer_nombre" name="primer_nombre" value="{{ old('primer_nombre') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <input type="text" class="form-control @error('primer_nombre') is-invalid @enderror" id="primer_nombre" name="primer_nombre" value="{{ old('primer_nombre') }}" required style="border: 1px solid #808080; color: #000000;">
                                         @error('primer_nombre')
                                             <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
                                         @enderror
@@ -36,7 +53,7 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="primer_apellido" class="form-label" style="color: #000000;">Primer Apellido <span style="color: #dc3545;">*</span></label>
-                                        <input type="text" class="form-control @error('primer_apellido') is-invalid @enderror" id="primer_apellido" name="primer_apellido" value="{{ old('primer_apellido') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <input type="text" class="form-control @error('primer_apellido') is-invalid @enderror" id="primer_apellido" name="primer_apellido" value="{{ old('primer_apellido') }}" required style="border: 1px solid #808080; color: #000000;">
                                         @error('primer_apellido')
                                             <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
                                         @enderror
@@ -49,14 +66,14 @@
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <label for="fecha_nacimiento" class="form-label" style="color: #000000;">Fecha de Nacimiento <span style="color: #dc3545;">*</span></label>
-                                        <input type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <input type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" required style="border: 1px solid #808080; color: #000000;">
                                         @error('fecha_nacimiento')
                                             <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="genero" class="form-label" style="color: #000000;">Género <span style="color: #dc3545;">*</span></label>
-                                        <select class="form-control @error('genero') is-invalid @enderror" id="genero" name="genero" style="border: 1px solid #808080; color: #000000;">
+                                        <select class="form-control @error('genero') is-invalid @enderror" id="genero" name="genero" required style="border: 1px solid #808080; color: #000000;">
                                             <option value="masculino" {{ old('genero') == 'masculino' ? 'selected' : '' }}>Masculino</option>
                                             <option value="femenino" {{ old('genero') == 'femenino' ? 'selected' : '' }}>Femenino</option>
                                             <option value="otro" {{ old('genero') == 'otro' ? 'selected' : '' }}>Otro</option>
@@ -67,7 +84,7 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="estado_civil" class="form-label" style="color: #000000;">Estado Civil <span style="color: #dc3545;">*</span></label>
-                                        <select class="form-control @error('estado_civil') is-invalid @enderror" id="estado_civil" name="estado_civil" style="border: 1px solid #808080; color: #000000;">
+                                        <select class="form-control @error('estado_civil') is-invalid @enderror" id="estado_civil" name="estado_civil" required style="border: 1px solid #808080; color: #000000;">
                                             <option value="soltero" {{ old('estado_civil') == 'soltero' ? 'selected' : '' }}>Soltero</option>
                                             <option value="casado" {{ old('estado_civil') == 'casado' ? 'selected' : '' }}>Casado</option>
                                             <option value="divorciado" {{ old('estado_civil') == 'divorciado' ? 'selected' : '' }}>Divorciado</option>
@@ -82,7 +99,7 @@
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <label for="tipo_documento" class="form-label" style="color: #000000;">Tipo de Documento <span style="color: #dc3545;">*</span></label>
-                                        <select class="form-control @error('tipo_documento') is-invalid @enderror" id="tipo_documento" name="tipo_documento" style="border: 1px solid #808080; color: #000000;">
+                                        <select class="form-control @error('tipo_documento') is-invalid @enderror" id="tipo_documento" name="tipo_documento" required style="border: 1px solid #808080; color: #000000;">
                                             <option value="cedula" {{ old('tipo_documento') == 'cedula' ? 'selected' : '' }}>Cédula</option>
                                             <option value="pasaporte" {{ old('tipo_documento') == 'pasaporte' ? 'selected' : '' }}>Pasaporte</option>
                                             <option value="tarjeta_identidad" {{ old('tipo_documento') == 'tarjeta_identidad' ? 'selected' : '' }}>Tarjeta de Identidad</option>
@@ -94,14 +111,14 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="numero_documento" class="form-label" style="color: #000000;">Número de Documento <span style="color: #dc3545;">*</span></label>
-                                        <input type="text" class="form-control @error('numero_documento') is-invalid @enderror" id="numero_documento" name="numero_documento" value="{{ old('numero_documento') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <input type="text" class="form-control @error('numero_documento') is-invalid @enderror" id="numero_documento" name="numero_documento" value="{{ old('numero_documento') }}" required style="border: 1px solid #808080; color: #000000;">
                                         @error('numero_documento')
                                             <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="nacionalidad" class="form-label" style="color: #000000;">Nacionalidad <span style="color: #dc3545;">*</span></label>
-                                        <input type="text" class="form-control @error('nacionalidad') is-invalid @enderror" id="nacionalidad" name="nacionalidad" value="{{ old('nacionalidad', 'Colombiana') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <input type="text" class="form-control @error('nacionalidad') is-invalid @enderror" id="nacionalidad" name="nacionalidad" value="{{ old('nacionalidad', 'Colombiana') }}" required style="border: 1px solid #808080; color: #000000;">
                                         @error('nacionalidad')
                                             <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
                                         @enderror
@@ -122,18 +139,24 @@
                                         <input type="text" class="form-control" id="telefono" name="telefono" value="{{ old('telefono') }}" style="border: 1px solid #808080; color: #000000;">
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="celular" class="form-label" style="color: #000000;">Celular</label>
-                                        <input type="text" class="form-control" id="celular" name="celular" value="{{ old('celular') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <label for="celular" class="form-label" style="color: #000000;">Celular <span style="color: #dc3545;">*</span></label>
+                                        <input type="text" class="form-control @error('celular') is-invalid @enderror" id="celular" name="celular" value="{{ old('celular') }}" required style="border: 1px solid #808080; color: #000000;">
+                                        @error('celular')
+                                            <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="email" class="form-label" style="color: #000000;">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <label for="email" class="form-label" style="color: #000000;">Email <span style="color: #dc3545;">*</span></label>
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required style="border: 1px solid #808080; color: #000000;">
+                                        @error('email')
+                                            <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label for="direccion_residencia" class="form-label" style="color: #000000;">Dirección de Residencia <span style="color: #dc3545;">*</span></label>
-                                        <textarea class="form-control @error('direccion_residencia') is-invalid @enderror" id="direccion_residencia" name="direccion_residencia" rows="2" style="border: 1px solid #808080; color: #000000;">{{ old('direccion_residencia') }}</textarea>
+                                        <textarea class="form-control @error('direccion_residencia') is-invalid @enderror" id="direccion_residencia" name="direccion_residencia" rows="2" required style="border: 1px solid #808080; color: #000000;">{{ old('direccion_residencia') }}</textarea>
                                         @error('direccion_residencia')
                                             <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
                                         @enderror
@@ -146,21 +169,21 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="ciudad" class="form-label" style="color: #000000;">Ciudad <span style="color: #dc3545;">*</span></label>
-                                        <input type="text" class="form-control @error('ciudad') is-invalid @enderror" id="ciudad" name="ciudad" value="{{ old('ciudad') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <input type="text" class="form-control @error('ciudad') is-invalid @enderror" id="ciudad" name="ciudad" value="{{ old('ciudad') }}" required style="border: 1px solid #808080; color: #000000;">
                                         @error('ciudad')
                                             <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="departamento" class="form-label" style="color: #000000;">Departamento <span style="color: #dc3545;">*</span></label>
-                                        <input type="text" class="form-control @error('departamento') is-invalid @enderror" id="departamento" name="departamento" value="{{ old('departamento') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <input type="text" class="form-control @error('departamento') is-invalid @enderror" id="departamento" name="departamento" value="{{ old('departamento') }}" required style="border: 1px solid #808080; color: #000000;">
                                         @error('departamento')
                                             <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="pais" class="form-label" style="color: #000000;">País <span style="color: #dc3545;">*</span></label>
-                                        <input type="text" class="form-control" id="pais" name="pais" value="{{ old('pais', 'Colombia') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <input type="text" class="form-control" id="pais" name="pais" value="{{ old('pais', 'Colombia') }}" required style="border: 1px solid #808080; color: #000000;">
                                     </div>
                                 </div>
                             </div>
@@ -209,10 +232,6 @@
                                     <div class="col-md-4 mb-3">
                                         <label for="lugar_trabajo" class="form-label" style="color: #000000;">Lugar de Trabajo</label>
                                         <input type="text" class="form-control" id="lugar_trabajo" name="lugar_trabajo" value="{{ old('lugar_trabajo') }}" style="border: 1px solid #808080; color: #000000;">
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="cargo" class="form-label" style="color: #000000;">Cargo</label>
-                                        <input type="text" class="form-control" id="cargo" name="cargo" value="{{ old('cargo') }}" style="border: 1px solid #808080; color: #000000;">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -264,7 +283,6 @@
                                             <option value="secundaria" {{ old('nivel_educativo') == 'secundaria' ? 'selected' : '' }}>Secundaria</option>
                                             <option value="tecnico" {{ old('nivel_educativo') == 'tecnico' ? 'selected' : '' }}>Técnico</option>
                                             <option value="universitario" {{ old('nivel_educativo') == 'universitario' ? 'selected' : '' }}>Universitario</option>
-                                            <option value="postgrado" {{ old('nivel_educativo') == 'postgrado' ? 'selected' : '' }}>Postgrado</option>
                                             <option value="ninguno" {{ old('nivel_educativo') == 'ninguno' ? 'selected' : '' }}>Ninguno</option>
                                         </select>
                                     </div>
@@ -309,11 +327,12 @@
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <label for="tipo_seguro_salud" class="form-label" style="color: #000000;">Tipo de Seguro de Salud</label>
-                                        <input type="text" class="form-control" id="tipo_seguro_salud" name="tipo_seguro_salud" value="{{ old('tipo_seguro_salud') }}" style="border: 1px solid #808080; color: #000000;">
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="eps" class="form-label" style="color: #000000;">EPS</label>
-                                        <input type="text" class="form-control" id="eps" name="eps" value="{{ old('eps') }}" style="border: 1px solid #808080; color: #000000;">
+                                        <select class="form-control" id="tipo_seguro_salud" name="tipo_seguro_salud" style="border: 1px solid #808080; color: #000000;">
+                                            <option value="">Seleccione un tipo...</option>
+                                            <option value="Sisbén" {{ old('tipo_seguro_salud') == 'Sisbén' ? 'selected' : '' }}>Sisbén</option>
+                                            <option value="Privado" {{ old('tipo_seguro_salud') == 'Privado' ? 'selected' : '' }}>Privado</option>
+                                            <option value="Especial" {{ old('tipo_seguro_salud') == 'Especial' ? 'selected' : '' }}>Especial</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -374,4 +393,17 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const preview = document.getElementById('image-preview');
+        preview.innerHTML = `<img src="${reader.result}" style="width: 100%; height: 100%; object-fit: cover;">`;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+@endpush
 

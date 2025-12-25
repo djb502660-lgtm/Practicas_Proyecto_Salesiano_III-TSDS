@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>@yield('title') - Proyecto Saleciano Costa Norte</title>
+    <title>@yield('title') - Proyecto salesiano</title>
     <meta name="description" content="" />
     <link rel="icon" type="image/jpeg" href="{{ asset('assets/img/icono.jpeg')}}" />
     <link rel="apple-touch-icon" href="{{ asset('assets/img/icono.jpeg')}}" />
@@ -28,9 +28,9 @@
                 <div class="app-brand demo">
                     <a href="{{ route('home') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
-                            <img src="{{ asset('assets/img/icono.jpeg') }}" alt="Proyecto Saleciano" style="width: 32px; height: 32px; margin-right: 8px;" />
+                            <img src="{{ asset('assets/img/icono.jpeg') }}" alt="Proyecto salesiano" style="width: 28px; height: 28px; margin-right: 8px;" />
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color: #000000;">Proyecto Saleciano</span>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color: #000000; font-size: 0.95rem;">Proyecto salesiano</span>
                     </a>
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -179,7 +179,7 @@
                     <footer class="content-footer footer bg-footer-theme" style="background-color: #ffffff; border-top: 1px solid #808080;">
                         <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                             <div class="mb-2 mb-md-0" style="color: #000000;">
-                                © {{ date('Y') }}, Proyecto Saleciano Costa Norte
+                                © {{ date('Y') }}, Proyecto salesiano
                             </div>
                         </div>
                     </footer>

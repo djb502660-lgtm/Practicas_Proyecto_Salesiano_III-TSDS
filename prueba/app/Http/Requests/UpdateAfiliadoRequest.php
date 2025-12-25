@@ -25,6 +25,7 @@ class UpdateAfiliadoRequest extends FormRequest
         $afiliadoId = $this->route('afiliado');
 
         return [
+            'foto' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'primer_nombre' => ['required', 'string', 'max:255'],
             'segundo_nombre' => ['nullable', 'string', 'max:255'],
             'primer_apellido' => ['required', 'string', 'max:255'],
@@ -36,8 +37,8 @@ class UpdateAfiliadoRequest extends FormRequest
             'tipo_documento' => ['required', 'in:cedula,pasaporte,tarjeta_identidad,cedula_extranjeria'],
             'numero_documento' => ['required', 'string', 'max:255', Rule::unique('afiliados')->ignore($afiliadoId)],
             'telefono' => ['nullable', 'string', 'max:20'],
-            'celular' => ['nullable', 'string', 'max:20'],
-            'email' => ['nullable', 'email', 'max:255'],
+            'celular' => ['required', 'string', 'max:20'],
+            'email' => ['required', 'email', 'max:255'],
             'direccion_residencia' => ['required', 'string'],
             'barrio' => ['nullable', 'string', 'max:255'],
             'ciudad' => ['required', 'string', 'max:255'],
@@ -50,17 +51,15 @@ class UpdateAfiliadoRequest extends FormRequest
             'informacion_familiar' => ['nullable', 'string'],
             'ocupacion' => ['nullable', 'string', 'max:255'],
             'lugar_trabajo' => ['nullable', 'string', 'max:255'],
-            'cargo' => ['nullable', 'string', 'max:255'],
             'ingresos_mensuales' => ['nullable', 'numeric', 'min:0'],
             'tipo_empleo' => ['nullable', 'in:empleado,independiente,desempleado,estudiante,jubilado,otro'],
             'descripcion_laboral' => ['nullable', 'string'],
-            'nivel_educativo' => ['nullable', 'in:primaria,secundaria,tecnico,universitario,postgrado,ninguno'],
+            'nivel_educativo' => ['nullable', 'in:primaria,secundaria,tecnico,universitario,ninguno'],
             'institucion_educativa' => ['nullable', 'string', 'max:255'],
             'titulo_obtenido' => ['nullable', 'string', 'max:255'],
             'estudiando_actualmente' => ['nullable', 'boolean'],
             'tiene_seguro_salud' => ['nullable', 'boolean'],
-            'tipo_seguro_salud' => ['nullable', 'string', 'max:255'],
-            'eps' => ['nullable', 'string', 'max:255'],
+            'tipo_seguro_salud' => ['nullable', 'in:Sisbén,Privado,Especial'],
             'condiciones_medicas' => ['nullable', 'string'],
             'medicamentos_permanentes' => ['nullable', 'string'],
             'alergias' => ['nullable', 'string'],
@@ -87,6 +86,13 @@ class UpdateAfiliadoRequest extends FormRequest
             'direccion_residencia.required' => 'La dirección de residencia es obligatoria.',
             'ciudad.required' => 'La ciudad es obligatoria.',
             'departamento.required' => 'El departamento es obligatorio.',
+            'celular.required' => 'El número de celular es obligatorio.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El formato del correo electrónico no es válido.',
+            'genero.required' => 'El género es obligatorio.',
+            'estado_civil.required' => 'El estado civil es obligatorio.',
+            'tipo_documento.required' => 'El tipo de documento es obligatorio.',
+            'nacionalidad.required' => 'La nacionalidad es obligatoria.',
         ];
     }
 }

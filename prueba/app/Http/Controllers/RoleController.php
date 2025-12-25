@@ -16,7 +16,13 @@ class RoleController extends Controller
      */
     public function index(): View
     {
-        $roles = Role::with('permissions')->latest()->paginate(15);
+        $roles = Role::with('permissions')
+            ->orderByRaw("CASE 
+                WHEN slug = 'director' THEN 1 
+                WHEN slug = 'coordinador' THEN 2 
+                WHEN slug = 'educador' THEN 3 
+                ELSE 4 END")
+            ->paginate(15);
 
         return view('admin.roles.index', compact('roles'));
     }
