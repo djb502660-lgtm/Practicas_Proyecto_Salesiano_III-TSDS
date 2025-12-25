@@ -12,15 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Actualizar todos los registros que tengan 'EPS' como tipo_seguro_salud
+        // Update all records that have 'EPS' in the tipo_seguro_salud column
         DB::table('afiliados')
             ->where('tipo_seguro_salud', 'EPS')
-            ->update(['tipo_seguro_salud' => 'Contributivo']);
-        
-        // Limpiar el campo eps (establecerlo como null)
-        DB::table('afiliados')
-            ->whereNotNull('eps')
-            ->update(['eps' => null]);
+            ->orWhere('tipo_seguro_salud', 'eps')
+            ->update(['tipo_seguro_salud' => 'Sisbén']);
     }
 
     /**
@@ -28,7 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // No es necesario revertir esta migración
-        // ya que estamos limpiando datos incorrectos
+        // No reverse needed as we are fixing data
     }
 };
