@@ -25,6 +25,7 @@ class UpdateAfiliadoRequest extends FormRequest
         $afiliadoId = $this->route('afiliado');
 
         return [
+            'foto' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'primer_nombre' => ['required', 'string', 'max:255'],
             'segundo_nombre' => ['nullable', 'string', 'max:255'],
             'primer_apellido' => ['required', 'string', 'max:255'],
@@ -50,11 +51,10 @@ class UpdateAfiliadoRequest extends FormRequest
             'informacion_familiar' => ['nullable', 'string'],
             'ocupacion' => ['nullable', 'string', 'max:255'],
             'lugar_trabajo' => ['nullable', 'string', 'max:255'],
-            'cargo' => ['nullable', 'string', 'max:255'],
             'ingresos_mensuales' => ['nullable', 'numeric', 'min:0'],
             'tipo_empleo' => ['nullable', 'in:empleado,independiente,desempleado,estudiante,jubilado,otro'],
             'descripcion_laboral' => ['nullable', 'string'],
-            'nivel_educativo' => ['nullable', 'in:primaria,secundaria,tecnico,universitario,postgrado,ninguno'],
+            'nivel_educativo' => ['nullable', 'in:primaria,secundaria,tecnico,universitario,ninguno'],
             'institucion_educativa' => ['nullable', 'string', 'max:255'],
             'titulo_obtenido' => ['nullable', 'string', 'max:255'],
             'estudiando_actualmente' => ['nullable', 'boolean'],

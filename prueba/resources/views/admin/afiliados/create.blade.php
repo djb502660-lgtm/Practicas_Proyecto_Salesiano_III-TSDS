@@ -11,7 +11,7 @@
                     <h4 class="mb-0" style="color: #000000;">Crear Nuevo Afiliado</h4>
                 </div>
                 <div class="card-body" style="background-color: #ffffff;">
-                    <form action="{{ route('admin.afiliados.store') }}" method="POST">
+                    <form action="{{ route('admin.afiliados.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Datos Personales -->
@@ -20,6 +20,23 @@
                                 <h5 style="color: #000000; margin: 0;"><i class="bx bx-user" style="color: #dc3545;"></i> Datos Personales</h5>
                             </div>
                             <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-12 text-center">
+                                        <div class="mb-3">
+                                            <label for="foto" class="form-label" style="color: #000000;">Foto del Expediente</label>
+                                            <div class="d-flex justify-content-center">
+                                                <div id="image-preview" style="width: 150px; height: 150px; border: 2px dashed #808080; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #f8f9fa;">
+                                                    <i class="bx bx-image-add" style="font-size: 3rem; color: #808080;"></i>
+                                                </div>
+                                            </div>
+                                            <input type="file" class="form-control mt-2 @error('foto') is-invalid @enderror" id="foto" name="foto" accept="image/*" onchange="previewImage(event)" style="border: 1px solid #808080; color: #000000;">
+                                            @error('foto')
+                                                <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
+                                            @enderror
+                                            <small class="text-muted">Formatos permitidos: JPG, PNG. Máx: 2MB</small>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="primer_nombre" class="form-label" style="color: #000000;">Primer Nombre <span style="color: #dc3545;">*</span></label>
@@ -216,10 +233,6 @@
                                         <label for="lugar_trabajo" class="form-label" style="color: #000000;">Lugar de Trabajo</label>
                                         <input type="text" class="form-control" id="lugar_trabajo" name="lugar_trabajo" value="{{ old('lugar_trabajo') }}" style="border: 1px solid #808080; color: #000000;">
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="cargo" class="form-label" style="color: #000000;">Cargo</label>
-                                        <input type="text" class="form-control" id="cargo" name="cargo" value="{{ old('cargo') }}" style="border: 1px solid #808080; color: #000000;">
-                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
@@ -270,7 +283,6 @@
                                             <option value="secundaria" {{ old('nivel_educativo') == 'secundaria' ? 'selected' : '' }}>Secundaria</option>
                                             <option value="tecnico" {{ old('nivel_educativo') == 'tecnico' ? 'selected' : '' }}>Técnico</option>
                                             <option value="universitario" {{ old('nivel_educativo') == 'universitario' ? 'selected' : '' }}>Universitario</option>
-                                            <option value="postgrado" {{ old('nivel_educativo') == 'postgrado' ? 'selected' : '' }}>Postgrado</option>
                                             <option value="ninguno" {{ old('nivel_educativo') == 'ninguno' ? 'selected' : '' }}>Ninguno</option>
                                         </select>
                                     </div>
@@ -381,4 +393,17 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const preview = document.getElementById('image-preview');
+        preview.innerHTML = `<img src="${reader.result}" style="width: 100%; height: 100%; object-fit: cover;">`;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+@endpush
 
