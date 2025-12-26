@@ -6,98 +6,77 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
-                <div class="card-header" style="background-color: #ffffff; border-bottom: 1px solid #808080;">
-                    <h4 class="mb-0" style="color: #000000;">
-                        <i class="bx bx-home" style="color: #dc3545;"></i> Panel de Control
-                    </h4>
+            <div class="card">
+                <div class="card-header">
+                    <div class="panel-header">
+                        <h4 class="mb-0">
+                            <i class="bx bx-home" style="color: #dc3545;"></i> Panel de Control
+                        </h4>
+                        <span class="panel-badge">Acceso rapido</span>
+                    </div>
                 </div>
-                <div class="card-body" style="background-color: #ffffff;">
-                    <div class="row">
-                        <div class="col-md-4 mb-4">
-                            <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
-                                <div class="card-body text-center">
-                                    <i class="bx bx-user" style="font-size: 3rem; color: #dc3545;"></i>
-                                    <h5 class="mt-3" style="color: #000000;">Usuarios</h5>
-                                    <p class="text-muted" style="color: #000000;">Gestiona los usuarios del sistema</p>
-                                    <a href="{{ route('admin.users.index') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
-                                        <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Usuarios
-                                    </a>
-                                </div>
+                <div class="card-body">
+                    <div class="dashboard-grid">
+                        <div class="card dash-card">
+                            <div class="dash-icon">
+                                <i class="bx bx-user"></i>
                             </div>
+                            <div class="dash-title">Usuarios</div>
+                            <div class="dash-desc">Gestiona los usuarios del sistema</div>
+                            <a href="{{ route('admin.users.index') }}" class="btn dash-action">Ver Usuarios</a>
                         </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
-                                <div class="card-body text-center">
-                                    <i class="bx bx-shield" style="font-size: 3rem; color: #dc3545;"></i>
-                                    <h5 class="mt-3" style="color: #000000;">Roles</h5>
-                                    <p class="text-muted" style="color: #000000;">Administra los roles del sistema</p>
-                                    <a href="{{ route('admin.roles.index') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
-                                        <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Roles
-                                    </a>
-                                </div>
+                        <div class="card dash-card">
+                            <div class="dash-icon">
+                                <i class="bx bx-shield"></i>
                             </div>
+                            <div class="dash-title">Roles</div>
+                            <div class="dash-desc">Administra los roles del sistema</div>
+                            <a href="{{ route('admin.roles.index') }}" class="btn dash-action">Ver Roles</a>
                         </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
-                                <div class="card-body text-center">
-                                    <i class="bx bx-check-circle" style="font-size: 3rem; color: #dc3545;"></i>
-                                    <h5 class="mt-3" style="color: #000000;">Permisos</h5>
-                                    <p class="text-muted" style="color: #000000;">Gestiona los permisos del sistema</p>
-                                    <a href="{{ route('admin.permissions.index') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
-                                        <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Permisos
-                                    </a>
-                                </div>
+                        <div class="card dash-card">
+                            <div class="dash-icon">
+                                <i class="bx bx-check-circle"></i>
                             </div>
+                            <div class="dash-title">Permisos</div>
+                            <div class="dash-desc">Gestiona los permisos del sistema</div>
+                            <a href="{{ route('admin.permissions.index') }}" class="btn dash-action">Ver Permisos</a>
                         </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
-                                <div class="card-body text-center">
-                                    <i class="bx bx-group" style="font-size: 3rem; color: #dc3545;"></i>
-                                    <h5 class="mt-3" style="color: #000000;">Afiliados</h5>
-                                    <p class="text-muted" style="color: #000000;">Gestiona las fichas socioeconómicas</p>
-                                    <a href="{{ route('admin.afiliados.index') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
-                                        <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Afiliados
-                                    </a>
-                                </div>
+                        <div class="card dash-card">
+                            <div class="dash-icon">
+                                <i class="bx bx-group"></i>
                             </div>
+                            <div class="dash-title">Afiliados</div>
+                            <div class="dash-desc">Gestiona las fichas socioeconomicas</div>
+                            <a href="{{ route('admin.afiliados.index') }}" class="btn dash-action">Ver Afiliados</a>
                         </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
-                                <div class="card-body text-center">
-                                    <i class="bx bx-line-chart" style="font-size: 3rem; color: #dc3545;"></i>
-                                    <h5 class="mt-3" style="color: #000000;">Mediciones</h5>
-                                    <p class="text-muted" style="color: #000000;">Registra peso, talla e IMC</p>
-                                    <a href="{{ route('admin.mediciones.index') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
-                                        <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Mediciones
-                                    </a>
-                                </div>
+                        <div class="card dash-card">
+                            <div class="dash-icon">
+                                <i class="bx bx-line-chart"></i>
                             </div>
+                            <div class="dash-title">Historial de mediciones</div>
+                            <div class="dash-desc">Registra peso, talla e IMC</div>
+                            <a href="{{ route('admin.mediciones.index') }}" class="btn dash-action">Ver Historial</a>
                         </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
-                                <div class="card-body text-center">
-                                    <i class="bx bx-brain" style="font-size: 3rem; color: #dc3545;"></i>
-                                    <h5 class="mt-3" style="color: #000000;">Psicologia</h5>
-                                    <p class="text-muted" style="color: #000000;">Evaluaciones y seguimientos</p>
-                                    <a href="{{ route('admin.psicologia.index') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
-                                        <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Psicologia
-                                    </a>
-                                </div>
+                        <div class="card dash-card">
+                            <div class="dash-icon">
+                                <i class="bx bx-brain"></i>
                             </div>
+                            <div class="dash-title">Psicologia</div>
+                            <div class="dash-desc">Evaluaciones y seguimientos</div>
+                            <a href="{{ route('admin.psicologia.index') }}" class="btn dash-action">Ver Psicologia</a>
                         </div>
                     </div>
 
                     @auth
                         <div class="row mt-4">
                             <div class="col-12">
-                                <div class="card" style="background-color: #f8f9fa; border: 1px solid #808080;">
+                                <div class="card welcome-card">
                                     <div class="card-body">
-                                        <h5 style="color: #000000;">Bienvenido, {{ Auth::user()->name }}</h5>
-                                        <p style="color: #000000;">Email: {{ Auth::user()->email }}</p>
+                                        <h5>Bienvenido, {{ Auth::user()->name }}</h5>
+                                        <p>Email: {{ Auth::user()->email }}</p>
                                         @if(Auth::user()->roles->count() > 0)
-                                            <p style="color: #000000;">
-                                                Roles: 
+                                            <p>
+                                                Roles:
                                                 @foreach(Auth::user()->roles as $role)
                                                     <span class="badge" style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">{{ $role->name }}</span>
                                                 @endforeach

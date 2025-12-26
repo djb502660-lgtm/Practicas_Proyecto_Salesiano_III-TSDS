@@ -17,6 +17,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="afiliado_id" class="form-label" style="color: #000000;">Afiliado <span style="color: #dc3545;">*</span></label>
+                                <input type="text" class="form-control mb-2" id="afiliado_busqueda" placeholder="Buscar afiliado..." style="border: 1px solid #808080; color: #000000;">
                                 <select class="form-control @error('afiliado_id') is-invalid @enderror" id="afiliado_id" name="afiliado_id" required style="border: 1px solid #808080; color: #000000;">
                                     <option value="">Seleccione un afiliado...</option>
                                     @foreach($afiliados as $afiliado)
@@ -95,6 +96,18 @@
 </div>
 
 <script>
+function filtrarAfiliados() {
+    const input = document.getElementById('afiliado_busqueda');
+    const filtro = input.value.toLowerCase();
+    const select = document.getElementById('afiliado_id');
+    const opciones = select.options;
+
+    for (let i = 0; i < opciones.length; i += 1) {
+        const texto = opciones[i].text.toLowerCase();
+        opciones[i].style.display = texto.includes(filtro) || opciones[i].value === '' ? '' : 'none';
+    }
+}
+
 function calcularIMC() {
     const peso = parseFloat(document.getElementById('peso').value);
     const talla = parseFloat(document.getElementById('talla').value);
@@ -129,5 +142,7 @@ function calcularIMC() {
         resultadoDiv.innerHTML = '<p>Complete los campos de peso y talla para calcular el IMC</p>';
     }
 }
+
+document.getElementById('afiliado_busqueda').addEventListener('input', filtrarAfiliados);
 </script>
 @endsection

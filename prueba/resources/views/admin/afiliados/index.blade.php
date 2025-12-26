@@ -9,10 +9,21 @@
             <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
                 <div class="card-header" style="background-color: #ffffff; border-bottom: 1px solid #808080;">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0" style="color: #000000;">Lista de Afiliados</h4>
-                        <a href="{{ route('admin.afiliados.create') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
-                            <i class="bx bx-plus" style="color: #ffffff;"></i> Nuevo Afiliado
-                        </a>
+                        <div>
+                            <h4 class="mb-0" style="color: #000000;">Lista de Afiliados</h4>
+                        </div>
+                        <div class="d-flex align-items-center" style="gap: 10px;">
+                            <form action="{{ route('admin.afiliados.index') }}" method="GET" class="d-flex" style="gap: 6px;">
+                                <input type="text" class="form-control" name="q" value="{{ $search ?? '' }}" placeholder="Buscar por nombre o documento" style="border: 1px solid #808080; color: #000000;">
+                                <button type="submit" class="btn" style="background-color: #808080; color: #ffffff; border: 1px solid #808080;">Buscar</button>
+                                @if(!empty($search))
+                                    <a href="{{ route('admin.afiliados.index') }}" class="btn" style="background-color: #ffffff; color: #000000; border: 1px solid #808080;">Limpiar</a>
+                                @endif
+                            </form>
+                            <a href="{{ route('admin.afiliados.create') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
+                                <i class="bx bx-plus" style="color: #ffffff;"></i> Nuevo Afiliado
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body" style="background-color: #ffffff;">
@@ -41,7 +52,7 @@
                                         <td style="color: #000000; border: 1px solid #808080;">{{ $afiliado->id }}</td>
                                         <td style="color: #000000; border: 1px solid #808080;">{{ $afiliado->nombre_completo }}</td>
                                         <td style="color: #000000; border: 1px solid #808080;">{{ $afiliado->numero_documento }}</td>
-                                        <td style="color: #000000; border: 1px solid #808080;">{{ $afiliado->ciudad }}</td>
+                                        <td style="color: #000000; border: 1px solid #808080;">{{ $afiliado->ciudad_residencia }}</td>
                                         <td style="color: #000000; border: 1px solid #808080;">
                                             <span class="badge" style="background-color: {{ $afiliado->estado === 'activo' ? '#28a745' : ($afiliado->estado === 'inactivo' ? '#ffc107' : '#dc3545') }}; color: #ffffff; border: 1px solid #808080;">
                                                 {{ ucfirst($afiliado->estado) }}
@@ -83,4 +94,3 @@
     </div>
 </div>
 @endsection
-

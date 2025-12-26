@@ -58,38 +58,43 @@ class PsicologiaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Psicologia $psicologia): View
+    public function show(Psicologia $psicologiaRegistro): View
     {
-        $psicologia->load(['afiliado', 'user']);
+        $psicologiaRegistro->load(['afiliado', 'user']);
 
-        return view('admin.psicologia.show', compact('psicologia'));
+        return view('admin.psicologia.show', [
+            'psicologiaRegistro' => $psicologiaRegistro,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Psicologia $psicologia): View
+    public function edit(Psicologia $psicologiaRegistro): View
     {
         $afiliados = Afiliado::where('estado', 'activo')
             ->orderBy('primer_nombre')
             ->get();
 
-        $psicologia->load('afiliado');
+        $psicologiaRegistro->load('afiliado');
 
-        return view('admin.psicologia.edit', compact('psicologia', 'afiliados'));
+        return view('admin.psicologia.edit', [
+            'psicologiaRegistro' => $psicologiaRegistro,
+            'afiliados' => $afiliados,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePsicologiaRequest $request, Psicologia $psicologia): RedirectResponse
+    public function update(UpdatePsicologiaRequest $request, Psicologia $psicologiaRegistro): RedirectResponse
     {
         $data = $request->validated();
         $data['riesgo_detectado'] = (bool) ($data['riesgo_detectado'] ?? false);
 
-        $psicologia->update($data);
+        $psicologiaRegistro->update($data);
 
-        $this->syncAlerta($psicologia);
+        $this->syncAlerta($psicologiaRegistro);
 
         return redirect()->route('admin.psicologia.index')
             ->with('success', 'Registro de psicologia actualizado exitosamente.');
@@ -98,9 +103,9 @@ class PsicologiaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Psicologia $psicologia): RedirectResponse
+    public function destroy(Psicologia $psicologiaRegistro): RedirectResponse
     {
-        $psicologia->delete();
+        $psicologiaRegistro->delete();
 
         return redirect()->route('admin.psicologia.index')
             ->with('success', 'Registro de psicologia eliminado exitosamente.');

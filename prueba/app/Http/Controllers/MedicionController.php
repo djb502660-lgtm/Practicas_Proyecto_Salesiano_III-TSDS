@@ -6,6 +6,7 @@ use App\Http\Requests\StoreMedicionRequest;
 use App\Http\Requests\UpdateMedicionRequest;
 use App\Models\Afiliado;
 use App\Models\Medicion;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -14,13 +15,33 @@ class MedicionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $mediciones = Medicion::with(['afiliado', 'user'])
-            ->latest('fecha_medicion')
-            ->paginate(15);
+        $search = trim((string) $request->get('q', ''));
 
-        return view('admin.mediciones.index', compact('mediciones'));
+        $medicionesQuery = Medicion::with(['afiliado', 'user'])
+            ->latest('fecha_medicion');
+
+        if ($search !== '') {
+            $medicionesQuery->where(function ($query) use ($search) {
+                $query->where('id', $search)
+                    ->orWhere('clasificacion', 'like', '%' . $search . '%')
+                    ->orWhere('fecha_medicion', 'like', '%' . $search . '%')
+                    ->orWhereHas('afiliado', function ($afiliadoQuery) use ($search) {
+                        $afiliadoQuery->where('primer_nombre', 'like', '%' . $search . '%')
+                            ->orWhere('segundo_nombre', 'like', '%' . $search . '%')
+                            ->orWhere('primer_apellido', 'like', '%' . $search . '%')
+                            ->orWhere('segundo_apellido', 'like', '%' . $search . '%')
+                            ->orWhere('numero_documento', 'like', '%' . $search . '%');
+                    });
+            });
+        }
+
+        $mediciones = $medicionesQuery
+            ->paginate(15)
+            ->appends(['q' => $search]);
+
+        return view('admin.mediciones.index', compact('mediciones', 'search'));
     }
 
     /**
@@ -55,7 +76,7 @@ class MedicionController extends Controller
         ]);
 
         return redirect()->route('admin.mediciones.index')
-            ->with('success', 'Medición registrada exitosamente.');
+            ->with('success', 'Medicion registrada exitosamente.');
     }
 
     /**
@@ -101,7 +122,7 @@ class MedicionController extends Controller
         ]);
 
         return redirect()->route('admin.mediciones.index')
-            ->with('success', 'Medición actualizada exitosamente.');
+            ->with('success', 'Medicion actualizada exitosamente.');
     }
 
     /**
@@ -112,7 +133,7 @@ class MedicionController extends Controller
         $medicion->delete();
 
         return redirect()->route('admin.mediciones.index')
-            ->with('success', 'Medición eliminada exitosamente.');
+            ->with('success', 'Medicion eliminada exitosamente.');
     }
 
     /**
@@ -126,8 +147,9 @@ class MedicionController extends Controller
             return 'peso_normal';
         } elseif ($imc < 30) {
             return 'sobrepeso';
-        } else {
-            return 'obesidad';
         }
+
+        return 'obesidad';
     }
 }
+

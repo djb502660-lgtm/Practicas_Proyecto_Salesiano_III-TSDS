@@ -89,9 +89,9 @@ class Medicion extends Model
             return 'peso_normal';
         } elseif ($imc < 30) {
             return 'sobrepeso';
-        } else {
-            return 'obesidad';
         }
+
+        return 'obesidad';
     }
 
     /**
@@ -100,8 +100,8 @@ class Medicion extends Model
     public function getClasificacionLabelAttribute(): string
     {
         return match ($this->clasificacion) {
-            'desnutricion' => 'Desnutrición',
-            'peso_normal' => 'Peso Normal',
+            'desnutricion' => 'Desnutricion',
+            'peso_normal' => 'Peso normal',
             'sobrepeso' => 'Sobrepeso',
             'obesidad' => 'Obesidad',
             default => 'No clasificado',
@@ -122,3 +122,4 @@ class Medicion extends Model
         };
     }
 }
+

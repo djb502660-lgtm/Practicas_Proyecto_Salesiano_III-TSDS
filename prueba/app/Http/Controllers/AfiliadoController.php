@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAfiliadoRequest;
 use App\Http\Requests\UpdateAfiliadoRequest;
 use App\Models\Afiliado;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -13,13 +14,31 @@ class AfiliadoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $afiliados = Afiliado::with('user')
-            ->latest()
-            ->paginate(15);
+        $search = trim((string) $request->get('q', ''));
 
-        return view('admin.afiliados.index', compact('afiliados'));
+        $afiliadosQuery = Afiliado::with('user')
+            ->latest();
+
+        if ($search !== '') {
+            $afiliadosQuery->where(function ($query) use ($search) {
+                $query->where('primer_nombre', 'like', '%' . $search . '%')
+                    ->orWhere('segundo_nombre', 'like', '%' . $search . '%')
+                    ->orWhere('primer_apellido', 'like', '%' . $search . '%')
+                    ->orWhere('segundo_apellido', 'like', '%' . $search . '%')
+                    ->orWhere('numero_documento', 'like', '%' . $search . '%')
+                    ->orWhere('ciudad_residencia', 'like', '%' . $search . '%')
+                    ->orWhere('sector_barrio', 'like', '%' . $search . '%')
+                    ->orWhere('departamento_referencia', 'like', '%' . $search . '%');
+            });
+        }
+
+        $afiliados = $afiliadosQuery
+            ->paginate(15)
+            ->appends(['q' => $search]);
+
+        return view('admin.afiliados.index', compact('afiliados', 'search'));
     }
 
     /**
@@ -84,4 +103,3 @@ class AfiliadoController extends Controller
             ->with('success', 'Afiliado eliminado exitosamente.');
     }
 }
-

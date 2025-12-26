@@ -73,7 +73,7 @@
                                                 <a href="{{ route('admin.psicologia.show', $registro) }}" class="btn btn-sm" style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
                                                     <i class="bx bx-show" style="color: #ffffff;"></i>
                                                 </a>
-                                                <a href="{{ route('admin.psicologia.edit', $registro) }}" class="btn btn-sm" style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
+                                                <a href="{{ route('admin.psicologia.edit', ['psicologiaRegistro' => $registro]) }}" class="btn btn-sm" style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
                                                     <i class="bx bx-edit" style="color: #ffffff;"></i>
                                                 </a>
                                                 <a href="{{ route('admin.psicologia.report', $registro->afiliado) }}" class="btn btn-sm" style="background-color: #808080; color: #ffffff; border: 1px solid #808080;">

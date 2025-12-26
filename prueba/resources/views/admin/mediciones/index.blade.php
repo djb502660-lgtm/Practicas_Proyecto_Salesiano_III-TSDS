@@ -1,6 +1,6 @@
 @extends('layaout.app')
 
-@section('title', 'Mediciones')
+@section('title', 'Historial de Mediciones')
 
 @section('content')
 <div class="container-fluid">
@@ -9,7 +9,7 @@
             <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
                 <div class="card-header" style="background-color: #ffffff; border-bottom: 1px solid #808080;">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0" style="color: #000000;">Registro de Mediciones</h4>
+                        <h4 class="mb-0" style="color: #000000;">Historial de Mediciones</h4>
                         <a href="{{ route('admin.mediciones.create') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
                             <i class="bx bx-plus" style="color: #ffffff;"></i> Nueva Medición
                         </a>
@@ -22,6 +22,14 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     @endif
+
+                    <form action="{{ route('admin.mediciones.index') }}" method="GET" class="mb-3 d-flex" style="gap: 6px;">
+                        <input type="text" class="form-control" name="q" value="{{ $search ?? '' }}" placeholder="Buscar por afiliado o documento" style="border: 1px solid #808080; color: #000000;">
+                        <button type="submit" class="btn" style="background-color: #808080; color: #ffffff; border: 1px solid #808080;">Buscar</button>
+                        @if(!empty($search))
+                            <a href="{{ route('admin.mediciones.index') }}" class="btn" style="background-color: #ffffff; color: #000000; border: 1px solid #808080;">Limpiar</a>
+                        @endif
+                    </form>
 
                     <div class="table-responsive">
                         <table class="table table-bordered" style="border: 1px solid #808080; color: #000000;">

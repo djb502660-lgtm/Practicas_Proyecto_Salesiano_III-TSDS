@@ -15,6 +15,250 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
+    <style>
+        :root {
+            --brand: #dc3545;
+            --brand-strong: #b02a37;
+            --brand-soft: rgba(220, 53, 69, 0.12);
+            --ink: #151515;
+            --ink-soft: #454545;
+            --canvas: #f5f2ef;
+            --card: #ffffff;
+            --shadow: 0 10px 30px rgba(10, 10, 10, 0.08);
+            --shadow-soft: 0 6px 18px rgba(10, 10, 10, 0.06);
+            --radius: 16px;
+        }
+
+        body {
+            background: radial-gradient(900px circle at 10% -10%, rgba(220, 53, 69, 0.12), transparent 60%),
+                linear-gradient(180deg, #f7f4f1 0%, #f2efec 100%);
+            color: var(--ink);
+            font-family: "Montserrat", "Public Sans", "Segoe UI", sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Playfair Display", "Montserrat", "Public Sans", sans-serif;
+            letter-spacing: 0.2px;
+        }
+
+        .layout-menu {
+            background: #ffffff !important;
+            border-right: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 10px 30px rgba(10, 10, 10, 0.04);
+            width: 300px;
+        }
+
+        .app-brand {
+            padding: 1.1rem 1.25rem;
+        }
+
+        .app-brand .app-brand-text {
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .menu-inner .menu-link {
+            border-radius: 12px;
+            margin: 6px 12px;
+            padding: 10px 14px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .menu-item.active > .menu-link {
+            background: var(--brand-soft) !important;
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .menu-link:hover {
+            transform: translateX(4px);
+        }
+
+        .layout-page {
+            margin-left: 300px;
+        }
+
+        .layout-menu-collapsed .layout-page {
+            margin-left: 0;
+        }
+
+        .layout-navbar {
+            border-radius: 18px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .content-wrapper {
+            position: relative;
+        }
+
+        .content-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.08), transparent 55%);
+            z-index: 0;
+        }
+
+        .container-xxl {
+            position: relative;
+            z-index: 1;
+            background: transparent !important;
+        }
+
+        .card {
+            background: var(--card) !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            border-radius: var(--radius) !important;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 34px rgba(10, 10, 10, 0.12);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.08), rgba(255, 255, 255, 0.9)) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+            border-radius: calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0 !important;
+        }
+
+        .btn {
+            border-radius: 999px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            box-shadow: 0 6px 14px rgba(220, 53, 69, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(220, 53, 69, 0.25);
+        }
+
+        .form-control,
+        .form-select,
+        textarea {
+            border-radius: 12px !important;
+            border-color: rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .form-control:focus,
+        .form-select:focus,
+        textarea:focus {
+            border-color: var(--brand) !important;
+            box-shadow: 0 0 0 0.18rem rgba(220, 53, 69, 0.18) !important;
+        }
+
+        .table {
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .badge {
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-weight: 600;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .dash-card {
+            position: relative;
+            overflow: hidden;
+            padding: 22px;
+            min-height: 190px;
+        }
+
+        .dash-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(120px circle at 85% -10%, rgba(220, 53, 69, 0.18), transparent 60%);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .dash-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: rgba(220, 53, 69, 0.12);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .dash-icon i {
+            font-size: 1.8rem;
+            color: var(--brand);
+        }
+
+        .dash-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .dash-desc {
+            color: var(--ink-soft);
+            margin-bottom: 16px;
+        }
+
+        .dash-action {
+            position: relative;
+            z-index: 1;
+            background: var(--brand);
+            color: #fff;
+        }
+
+        .dash-action:hover {
+            background: var(--brand-strong);
+            color: #fff;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .panel-badge {
+            background: rgba(220, 53, 69, 0.12);
+            color: var(--brand-strong);
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-weight: 600;
+        }
+
+        .welcome-card {
+            background: linear-gradient(120deg, #ffffff, rgba(220, 53, 69, 0.08)) !important;
+        }
+
+        @keyframes riseIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card,
+        .alert {
+            animation: riseIn 0.35s ease both;
+        }
+    </style>
     <script src="{{ asset('assets/vendor/js/helpers.js')}}"></script>
     <script src="{{ asset('assets/js/config.js')}}"></script>
 </head>
@@ -77,7 +321,7 @@
                     <li class="menu-item {{ request()->routeIs('admin.mediciones.*') ? 'active' : '' }}">
                         <a href="{{ route('admin.mediciones.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-line-chart" style="color: #dc3545;"></i>
-                            <div data-i18n="Mediciones" style="color: #000000;">Mediciones</div>
+                            <div data-i18n="Historial de mediciones" style="color: #000000;">Historial de mediciones</div>
                         </a>
                     </li>
 
