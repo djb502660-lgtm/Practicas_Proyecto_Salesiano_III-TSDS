@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MedicionController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PsicologiaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,12 @@ Route::middleware(['auth'])->group(function (): void {
         Route::resource('mediciones', MedicionController::class)->parameters([
             'mediciones' => 'medicion',
         ]);
+        Route::get('psicologia/reportes/{afiliado}', [PsicologiaController::class, 'report'])
+            ->name('psicologia.report');
+        Route::get('psicologia-alertas', [PsicologiaController::class, 'alertasIndex'])
+            ->name('psicologia-alertas.index');
+        Route::resource('psicologia', PsicologiaController::class)->parameters([
+            'psicologia' => 'psicologia',
+        ]);
     });
 });
-

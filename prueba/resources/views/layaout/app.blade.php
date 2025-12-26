@@ -80,6 +80,22 @@
                             <div data-i18n="Mediciones" style="color: #000000;">Mediciones</div>
                         </a>
                     </li>
+
+                    <!-- Psicologia -->
+                    <li class="menu-item {{ request()->routeIs('admin.psicologia.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.psicologia.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-brain" style="color: #dc3545;"></i>
+                            <div data-i18n="Psicologia" style="color: #000000;">Psicologia</div>
+                        </a>
+                    </li>
+
+                    <!-- Alertas Psicologia -->
+                    <li class="menu-item {{ request()->routeIs('admin.psicologia-alertas.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.psicologia-alertas.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-alarm" style="color: #dc3545;"></i>
+                            <div data-i18n="Alertas Psicologia" style="color: #000000;">Alertas Psicologia</div>
+                        </a>
+                    </li>
                     @endauth
                 </ul>
             </aside>
