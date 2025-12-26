@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePsicologiaRegistroRequest extends FormRequest
+class UpdatePsicologiaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,6 +30,7 @@ class StorePsicologiaRegistroRequest extends FormRequest
             'diagnostico_inicial' => ['required_if:tipo,evaluacion', 'nullable', 'string'],
             'evolucion' => ['required_if:tipo,seguimiento', 'nullable', 'string'],
             'observaciones' => ['nullable', 'string'],
+            'riesgo_detectado' => ['nullable', 'boolean'],
             'nivel_riesgo' => ['required', 'in:bajo,medio,alto'],
         ];
     }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePsicologiaRegistroRequest;
-use App\Http\Requests\UpdatePsicologiaRegistroRequest;
+use App\Http\Requests\StorePsicologiaRequest;
+use App\Http\Requests\UpdatePsicologiaRequest;
 use App\Models\Afiliado;
+use App\Models\Psicologia;
 use App\Models\PsicologiaAlerta;
-use App\Models\PsicologiaRegistro;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -17,7 +17,7 @@ class PsicologiaController extends Controller
      */
     public function index(): View
     {
-        $registros = PsicologiaRegistro::with(['afiliado', 'user'])
+        $registros = Psicologia::with(['afiliado', 'user'])
             ->latest('fecha_registro')
             ->paginate(15);
 
@@ -41,12 +41,13 @@ class PsicologiaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePsicologiaRegistroRequest $request): RedirectResponse
+    public function store(StorePsicologiaRequest $request): RedirectResponse
     {
-        $registro = PsicologiaRegistro::create(array_merge(
-            $request->validated(),
-            ['user_id' => auth()->id()]
-        ));
+        $data = $request->validated();
+        $data['riesgo_detectado'] = (bool) ($data['riesgo_detectado'] ?? false);
+        $data['user_id'] = auth()->id();
+
+        $registro = Psicologia::create($data);
 
         $this->syncAlerta($registro);
 
@@ -57,35 +58,38 @@ class PsicologiaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PsicologiaRegistro $psicologiaRegistro): View
+    public function show(Psicologia $psicologia): View
     {
-        $psicologiaRegistro->load(['afiliado', 'user']);
+        $psicologia->load(['afiliado', 'user']);
 
-        return view('admin.psicologia.show', compact('psicologiaRegistro'));
+        return view('admin.psicologia.show', compact('psicologia'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PsicologiaRegistro $psicologiaRegistro): View
+    public function edit(Psicologia $psicologia): View
     {
         $afiliados = Afiliado::where('estado', 'activo')
             ->orderBy('primer_nombre')
             ->get();
 
-        $psicologiaRegistro->load('afiliado');
+        $psicologia->load('afiliado');
 
-        return view('admin.psicologia.edit', compact('psicologiaRegistro', 'afiliados'));
+        return view('admin.psicologia.edit', compact('psicologia', 'afiliados'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePsicologiaRegistroRequest $request, PsicologiaRegistro $psicologiaRegistro): RedirectResponse
+    public function update(UpdatePsicologiaRequest $request, Psicologia $psicologia): RedirectResponse
     {
-        $psicologiaRegistro->update($request->validated());
+        $data = $request->validated();
+        $data['riesgo_detectado'] = (bool) ($data['riesgo_detectado'] ?? false);
 
-        $this->syncAlerta($psicologiaRegistro);
+        $psicologia->update($data);
+
+        $this->syncAlerta($psicologia);
 
         return redirect()->route('admin.psicologia.index')
             ->with('success', 'Registro de psicologia actualizado exitosamente.');
@@ -94,9 +98,9 @@ class PsicologiaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PsicologiaRegistro $psicologiaRegistro): RedirectResponse
+    public function destroy(Psicologia $psicologia): RedirectResponse
     {
-        $psicologiaRegistro->delete();
+        $psicologia->delete();
 
         return redirect()->route('admin.psicologia.index')
             ->with('success', 'Registro de psicologia eliminado exitosamente.');
@@ -107,7 +111,7 @@ class PsicologiaController extends Controller
      */
     public function report(Afiliado $afiliado): View
     {
-        $registros = PsicologiaRegistro::where('afiliado_id', $afiliado->id)
+        $registros = Psicologia::where('afiliado_id', $afiliado->id)
             ->orderBy('fecha_registro')
             ->get();
 
@@ -119,7 +123,7 @@ class PsicologiaController extends Controller
      */
     public function alertasIndex(): View
     {
-        $alertas = PsicologiaAlerta::with(['afiliado', 'registro', 'user'])
+        $alertas = PsicologiaAlerta::with(['afiliado', 'psicologia', 'user'])
             ->latest()
             ->paginate(15);
 
@@ -129,12 +133,14 @@ class PsicologiaController extends Controller
     /**
      * Create or close alerts based on risk level.
      */
-    private function syncAlerta(PsicologiaRegistro $registro): void
+    private function syncAlerta(Psicologia $registro): void
     {
-        if ($registro->nivel_riesgo === 'alto') {
-            $registro->loadMissing('afiliado');
-            PsicologiaAlerta::firstOrCreate(
-                ['psicologia_registro_id' => $registro->id],
+        $registro->loadMissing('afiliado');
+        $debeAlertar = $registro->riesgo_detectado && $registro->nivel_riesgo === 'alto';
+
+        if ($debeAlertar) {
+            PsicologiaAlerta::updateOrCreate(
+                ['psicologia_id' => $registro->id],
                 [
                     'afiliado_id' => $registro->afiliado_id,
                     'nivel_riesgo' => $registro->nivel_riesgo,
@@ -148,11 +154,15 @@ class PsicologiaController extends Controller
                 ]
             );
 
+            $registro->updateQuietly(['alerta_generada' => true]);
+
             return;
         }
 
-        PsicologiaAlerta::where('psicologia_registro_id', $registro->id)
+        PsicologiaAlerta::where('psicologia_id', $registro->id)
             ->where('estado', 'pendiente')
             ->update(['estado' => 'cerrada']);
+
+        $registro->updateQuietly(['alerta_generada' => false]);
     }
 }

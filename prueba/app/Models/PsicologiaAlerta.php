@@ -23,7 +23,7 @@ class PsicologiaAlerta extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'psicologia_registro_id',
+        'psicologia_id',
         'afiliado_id',
         'nivel_riesgo',
         'mensaje',
@@ -34,9 +34,9 @@ class PsicologiaAlerta extends Model
     /**
      * Get the record that owns the alert.
      */
-    public function registro(): BelongsTo
+    public function psicologia(): BelongsTo
     {
-        return $this->belongsTo(PsicologiaRegistro::class, 'psicologia_registro_id');
+        return $this->belongsTo(Psicologia::class);
     }
 
     /**

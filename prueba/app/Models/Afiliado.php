@@ -116,11 +116,11 @@ class Afiliado extends Model
     }
 
     /**
-     * Get the psicologia registros for the afiliado.
+     * Get the psicologia records for the afiliado.
      */
-    public function psicologiaRegistros(): HasMany
+    public function psicologias(): HasMany
     {
-        return $this->hasMany(PsicologiaRegistro::class);
+        return $this->hasMany(Psicologia::class);
     }
 
     /**

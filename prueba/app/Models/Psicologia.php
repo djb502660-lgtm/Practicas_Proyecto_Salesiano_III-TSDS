@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class PsicologiaRegistro extends Model
+class Psicologia extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class PsicologiaRegistro extends Model
      *
      * @var string
      */
-    protected $table = 'psicologia_registros';
+    protected $table = 'psicologias';
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +32,9 @@ class PsicologiaRegistro extends Model
         'diagnostico_inicial',
         'evolucion',
         'observaciones',
+        'riesgo_detectado',
         'nivel_riesgo',
+        'alerta_generada',
         'user_id',
     ];
 
@@ -45,6 +47,8 @@ class PsicologiaRegistro extends Model
     {
         return [
             'fecha_registro' => 'date',
+            'riesgo_detectado' => 'boolean',
+            'alerta_generada' => 'boolean',
         ];
     }
 
@@ -81,6 +85,32 @@ class PsicologiaRegistro extends Model
             'evaluacion' => 'Evaluacion',
             'seguimiento' => 'Seguimiento',
             default => 'Registro',
+        };
+    }
+
+    /**
+     * Get the label for the risk level.
+     */
+    public function getNivelRiesgoLabelAttribute(): string
+    {
+        return match ($this->nivel_riesgo) {
+            'bajo' => 'Bajo',
+            'medio' => 'Medio',
+            'alto' => 'Alto',
+            default => 'Sin Clasificar',
+        };
+    }
+
+    /**
+     * Get the color for the risk level badge.
+     */
+    public function getNivelRiesgoColorAttribute(): string
+    {
+        return match ($this->nivel_riesgo) {
+            'bajo' => '#28a745',
+            'medio' => '#ffc107',
+            'alto' => '#dc3545',
+            default => '#6c757d',
         };
     }
 }
