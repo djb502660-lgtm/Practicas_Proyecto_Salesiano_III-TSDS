@@ -116,6 +116,14 @@ class Afiliado extends Model
     }
 
     /**
+     * Get the psicologia registros for the afiliado.
+     */
+    public function psicologiaRegistros(): HasMany
+    {
+        return $this->hasMany(PsicologiaRegistro::class);
+    }
+
+    /**
      * Get the latest medicion for the afiliado.
      */
     public function ultimaMedicion(): ?Medicion
@@ -123,4 +131,3 @@ class Afiliado extends Model
         return $this->mediciones()->latest('fecha_medicion')->first();
     }
 }
-
