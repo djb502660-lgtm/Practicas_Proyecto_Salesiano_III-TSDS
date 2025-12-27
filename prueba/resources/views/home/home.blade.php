@@ -173,7 +173,7 @@
             </div>
 
             <div class="guest-more">Conoce mas sobre la fundacion</div>
-            <a class="guest-link" href="http://roysisalesiano.hairanora.com" target="_blank" rel="noopener">http://roysisalesiano.hairanora.com</a>
+            <a class="guest-link" href="https://www.proyectosalesiano.org.ec/" target="_blank" rel="noopener">https://www.proyectosalesiano.org.ec/</a>
         </div>
     </div>
 @else
@@ -191,6 +191,7 @@
                 </div>
                 <div class="card-body">
                     <div class="dashboard-grid">
+                        @if(auth()->user()->hasRole('admin'))
                         <div class="card dash-card">
                             <div class="dash-icon">
                                 <i class="bx bx-user"></i>
@@ -231,6 +232,8 @@
                             <div class="dash-desc">Registra peso, talla e IMC</div>
                             <a href="{{ route('admin.mediciones.index') }}" class="btn dash-action">Ver Historial</a>
                         </div>
+                        @endif
+                        @if(auth()->user()->hasAnyRole(['admin', 'psicologo']))
                         <div class="card dash-card">
                             <div class="dash-icon">
                                 <i class="bx bx-brain"></i>
@@ -239,6 +242,7 @@
                             <div class="dash-desc">Evaluaciones y seguimientos</div>
                             <a href="{{ route('admin.psicologia.index') }}" class="btn dash-action">Ver Psicologia</a>
                         </div>
+                        @endif
                     </div>
 
                     @auth

@@ -288,53 +288,71 @@
                     <li class="menu-item {{ request()->routeIs('home') ? 'active' : '' }}">
                         <a href="{{ route('home') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle" style="color: #dc3545;"></i>
-                            <div data-i18n="Inicio" style="color: #000000;">Inicio</div>
+                            <div data-i18n="Inicio" style="color: #000000;">
+                                {{ auth()->check() && auth()->user()->hasRole('psicologo') && !auth()->user()->hasRole('admin') ? 'Dashboard' : 'Inicio' }}
+                            </div>
                         </a>
                     </li>
 
                     @auth
-                    <!-- Usuarios -->
-                    <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.users.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user" style="color: #dc3545;"></i>
-                            <div data-i18n="Usuarios" style="color: #000000;">Usuarios</div>
-                        </a>
-                    </li>
-
-                    <!-- Roles -->
-                    <li class="menu-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.roles.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-shield" style="color: #dc3545;"></i>
-                            <div data-i18n="Roles" style="color: #000000;">Roles</div>
-                        </a>
-                    </li>
-
-                    <!-- Afiliados -->
-                    <li class="menu-item {{ request()->routeIs('admin.afiliados.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.afiliados.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-group" style="color: #dc3545;"></i>
-                            <div data-i18n="Afiliados" style="color: #000000;">Afiliados</div>
-                        </a>
-                    </li>
-
-                    <!-- Mediciones -->
-                    <li class="menu-item {{ request()->routeIs('admin.mediciones.*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.mediciones.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-line-chart" style="color: #dc3545;"></i>
-                            <div data-i18n="Historial de mediciones" style="color: #000000;">Historial de mediciones</div>
-                        </a>
-                    </li>
-
-                    @if(auth()->user()->hasAnyPermission(['psicologia.view', 'psicologia.create', 'psicologia.edit', 'psicologia.delete']))
-                        <!-- Psicologia -->
-                        <li class="menu-item {{ request()->routeIs('admin.psicologia.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.psicologia.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-brain" style="color: #dc3545;"></i>
-                                <div data-i18n="Psicologia" style="color: #000000;">Psicologia</div>
+                        @if(auth()->user()->hasRole('psicologo') && !auth()->user()->hasRole('admin'))
+                        <li class="menu-item">
+                            <a href="javascript:void(0)" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user" style="color: #dc3545;"></i>
+                                <div data-i18n="Usuarios" style="color: #000000;">Usuarios</div>
                             </a>
                         </li>
-                    @endif
+                        <li class="menu-item">
+                            <a href="javascript:void(0)" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-restaurant" style="color: #dc3545;"></i>
+                                <div data-i18n="Comedor" style="color: #000000;">Comedor</div>
+                            </a>
+                        </li>
+                        @endif
 
+                        @if(auth()->user()->hasRole('admin'))
+                        <!-- Usuarios -->
+                        <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.users.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user" style="color: #dc3545;"></i>
+                                <div data-i18n="Usuarios" style="color: #000000;">Usuarios</div>
+                            </a>
+                        </li>
+
+                        <!-- Roles -->
+                        <li class="menu-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.roles.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-shield" style="color: #dc3545;"></i>
+                                <div data-i18n="Roles" style="color: #000000;">Roles</div>
+                            </a>
+                        </li>
+
+                        <!-- Afiliados -->
+                        <li class="menu-item {{ request()->routeIs('admin.afiliados.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.afiliados.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-group" style="color: #dc3545;"></i>
+                                <div data-i18n="Afiliados" style="color: #000000;">Afiliados</div>
+                            </a>
+                        </li>
+
+                        <!-- Mediciones -->
+                        <li class="menu-item {{ request()->routeIs('admin.mediciones.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.mediciones.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-line-chart" style="color: #dc3545;"></i>
+                                <div data-i18n="Historial de mediciones" style="color: #000000;">Historial de mediciones</div>
+                            </a>
+                        </li>
+                        @endif
+
+                        @if(auth()->user()->hasAnyRole(['admin', 'psicologo']))
+                            <!-- Psicologia -->
+                            <li class="menu-item {{ request()->routeIs('admin.psicologia.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.psicologia.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-brain" style="color: #dc3545;"></i>
+                                    <div data-i18n="Psicologia" style="color: #000000;">Psicologia</div>
+                                </a>
+                            </li>
+                        @endif
                     @endauth
                 </ul>
             </aside>

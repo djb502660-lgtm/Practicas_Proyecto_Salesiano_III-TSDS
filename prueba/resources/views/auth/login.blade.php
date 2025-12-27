@@ -3,8 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - Proyecto Saleciano Costa Norte</title>
+    <title>Iniciar sesión - Proyecto Salesiano Costa Norte</title>
     <link rel="icon" type="image/jpeg" href="{{ asset('assets/img/icono.jpeg')}}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
@@ -13,21 +16,182 @@
     <script src="{{ asset('assets/vendor/js/helpers.js')}}"></script>
     <script src="{{ asset('assets/js/config.js')}}"></script>
 </head>
-<body style="background-color: #ffffff;">
-    <div class="container-xxl">
+<body class="login-page">
+    <style>
+        :root {
+            --login-red: #d8262d;
+            --login-red-dark: #b91e24;
+            --login-gray: #6a6a6a;
+            --login-light: #f8f8f8;
+            --login-border: #f0c7c7;
+        }
+
+        .login-page {
+            min-height: 100vh;
+            background: radial-gradient(circle at top, rgba(216, 38, 45, 0.08), transparent 60%),
+                linear-gradient(180deg, #f6efef 0%, #ffffff 60%);
+            font-family: "Poppins", sans-serif;
+        }
+
+        .login-shell {
+            padding: 56px 16px 72px;
+        }
+
+        .login-card {
+            background-color: #ffffff;
+            border: 1px solid var(--login-border);
+            border-radius: 36px;
+            padding: 36px 40px 32px;
+            box-shadow: 0 26px 60px rgba(15, 15, 15, 0.12);
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .login-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .login-logo {
+            width: 110px;
+            height: 110px;
+            border-radius: 999px;
+            object-fit: cover;
+            box-shadow: 0 12px 24px rgba(216, 38, 45, 0.22);
+        }
+
+        .login-headline {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            text-align: center;
+        }
+
+        .login-brand {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #111111;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .login-heading {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #111111;
+        }
+
+        .login-caption {
+            color: var(--login-gray);
+            font-size: 0.95rem;
+            margin-left: 0;
+        }
+
+        .login-label {
+            font-weight: 700;
+            color: #2b2b2b;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.7rem;
+        }
+
+        .login-input {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 14px;
+            padding: 12px 16px;
+        }
+
+        .login-input:focus {
+            border-color: var(--login-red);
+            box-shadow: 0 0 0 0.15rem rgba(216, 38, 45, 0.18);
+        }
+
+        .login-addon {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-left: 0;
+            border-radius: 0 14px 14px 0;
+        }
+
+        .login-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .login-check {
+            color: #5f5f5f;
+            font-size: 0.95rem;
+        }
+
+        .login-btn {
+            background: var(--login-red);
+            border: none;
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 14px 16px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            box-shadow: 0 12px 24px rgba(216, 38, 45, 0.25);
+        }
+
+        .login-btn:hover {
+            background: var(--login-red-dark);
+            color: #ffffff;
+        }
+
+        .login-register {
+            color: #2b2b2b;
+            margin-top: 6px;
+        }
+
+        .login-register a {
+            color: var(--login-red);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-register a:hover {
+            color: var(--login-red-dark);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .login-card {
+                padding: 32px 26px 28px;
+            }
+
+            .login-header {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+    <div class="container-xxl login-shell">
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner">
-                <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
-                    <div class="card-body" style="background-color: #ffffff;">
-                        <div class="app-brand justify-content-center mb-4">
-                            <div class="text-center mb-3">
-                                <img src="{{ asset('assets/img/icono.jpeg') }}" alt="Proyecto Saleciano" style="width: 80px; height: 80px; margin-bottom: 1rem;" />
+                <div class="card login-card">
+                    <div class="card-body">
+                        <div class="login-header">
+                            <img src="{{ asset('assets/img/icono.jpeg') }}" alt="Proyecto Salesiano" class="login-logo" />
+                            <div>
+                                <div class="login-headline">
+                                    <span class="login-brand">Proyecto Salesiano Costa Norte</span>
+                                    <span class="login-heading">Iniciar sesión</span>
+                                    <span class="login-caption">Ingresa tus datos para continuar</span>
+                                </div>
                             </div>
-                            <h2 style="color: #000000; text-align: center; margin-bottom: 2rem;">Proyecto Saleciano Costa Norte</h2>
                         </div>
-
-                        <h4 class="mb-2" style="color: #000000; text-align: center;">Bienvenido</h4>
-                        <p class="mb-4" style="color: #000000; text-align: center;">Por favor inicia sesión en tu cuenta</p>
 
                         @if($errors->any())
                             <div class="alert alert-danger alert-dismissible fade show" role="alert" style="background-color: #f8d7da; border: 1px solid #808080; color: #000000;">
@@ -43,59 +207,53 @@
                         <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <label for="email" class="form-label" style="color: #000000;">Email</label>
+                                <label for="email" class="form-label login-label">Introduce tu correo electrónico</label>
                                 <input
-                                    type="text"
-                                    class="form-control @error('email') is-invalid @enderror"
+                                    type="email"
+                                    class="form-control login-input @error('email') is-invalid @enderror"
                                     id="email"
                                     name="email"
-                                    placeholder="Ingresa tu email"
+                                    placeholder="correo@correo.com"
                                     autofocus
                                     value="{{ old('email') }}"
-                                    style="border: 1px solid #808080; color: #000000;"
                                 />
                                 @error('email')
                                     <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="mb-3 form-password-toggle">
-                                <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password" style="color: #000000;">Contraseña</label>
-                                </div>
+                                <label class="form-label login-label" for="password">Ingresa tu contraseña</label>
                                 <div class="input-group input-group-merge">
                                     <input
                                         type="password"
                                         id="password"
-                                        class="form-control @error('password') is-invalid @enderror"
+                                        class="form-control login-input @error('password') is-invalid @enderror"
                                         name="password"
                                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                         aria-describedby="password"
-                                        style="border: 1px solid #808080; color: #000000;"
                                     />
-                                    <span class="input-group-text cursor-pointer" style="background-color: #ffffff; border: 1px solid #808080; color: #000000;"><i class="bx bx-hide"></i></span>
+                                    <span class="input-group-text cursor-pointer login-addon"><i class="bx bx-hide"></i></span>
                                 </div>
                                 @error('password')
                                     <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="remember" name="remember" style="border: 1px solid #808080;" />
-                                    <label class="form-check-label" for="remember" style="color: #000000;"> Recordarme </label>
+                            <div class="mb-4 login-meta">
+                                <div class="form-check m-0 login-check">
+                                    <input class="form-check-input" type="checkbox" id="remember" name="remember" />
+                                    <label class="form-check-label" for="remember">Recuérdame</label>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit" style="background-color: #dc3545; color: #ffffff; border: none;">
-                                    <i class="bx bx-log-in" style="color: #ffffff;"></i> Iniciar Sesión
+                                <button class="btn login-btn d-grid w-100" type="submit">
+                                    <i class="bx bx-log-in" style="color: #ffffff;"></i> Iniciar sesión
                                 </button>
                             </div>
                         </form>
 
-                        <p class="text-center" style="color: #000000;">
+                        <p class="text-center login-register">
                             <span>¿No tienes una cuenta?</span>
-                            <a href="{{ route('register') }}" style="color: #dc3545;">
-                                <span>Regístrate</span>
-                            </a>
+                            <a href="{{ route('register') }}">Regístrate</a>
                         </p>
                     </div>
                 </div>
@@ -111,4 +269,3 @@
     <script src="{{ asset('assets/js/main.js')}}"></script>
 </body>
 </html>
-

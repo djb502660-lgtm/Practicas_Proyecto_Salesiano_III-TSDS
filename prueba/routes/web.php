@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Rutas de autenticación
+// Rutas de autenticacion
 Route::middleware(['guest'])->group(function (): void {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
@@ -24,7 +24,7 @@ Route::middleware(['guest'])->group(function (): void {
 Route::middleware(['auth'])->group(function (): void {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::prefix('admin')->name('admin.')->group(function (): void {
+    Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function (): void {
         Route::resource('users', UserController::class);
         Route::resource('roles', RoleController::class);
         Route::resource('permissions', PermissionController::class);
@@ -32,6 +32,9 @@ Route::middleware(['auth'])->group(function (): void {
         Route::resource('mediciones', MedicionController::class)->parameters([
             'mediciones' => 'medicion',
         ]);
+    });
+
+    Route::prefix('admin')->name('admin.')->middleware('role:admin,psicologo')->group(function (): void {
         Route::get('psicologia/reportes/{afiliado}', [PsicologiaController::class, 'report'])
             ->name('psicologia.report');
         Route::get('psicologia-alertas', [PsicologiaController::class, 'alertasIndex'])

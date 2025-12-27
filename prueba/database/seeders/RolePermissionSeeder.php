@@ -24,7 +24,7 @@ class RolePermissionSeeder extends Seeder
         $this->command->info('Creando usuarios...');
         $this->createUsers($roles);
 
-        $this->command->info('¡Seeder completado exitosamente!');
+        $this->command->info('Seeder completado exitosamente!');
     }
 
     /**
@@ -86,7 +86,7 @@ class RolePermissionSeeder extends Seeder
                 $permissionData
             );
             $permissions[$permissionData['slug']] = $permission;
-            $this->command->info("  ✓ Permiso creado: {$permissionData['name']}");
+            $this->command->info("  - Permiso creado: {$permissionData['name']}");
         }
 
         return $permissions;
@@ -109,14 +109,14 @@ class RolePermissionSeeder extends Seeder
             ]
         );
         $adminRole->permissions()->sync(array_column($permissions, 'id'));
-        $this->command->info("  ✓ Rol creado: {$adminRole->name} (con todos los permisos)");
+        $this->command->info("  - Rol creado: {$adminRole->name} (con todos los permisos)");
 
-        // Rol Editor - Permisos de visualización y edición limitada
+        // Rol Editor - Permisos de visualizacion y edicion limitada
         $editorRole = Role::updateOrCreate(
             ['slug' => 'editor'],
             [
                 'name' => 'Editor',
-                'description' => 'Rol con permisos de visualización y edición limitada.',
+                'description' => 'Rol con permisos de visualizacion y edicion limitada.',
             ]
         );
         $editorRole->permissions()->sync([
@@ -137,14 +137,14 @@ class RolePermissionSeeder extends Seeder
             $permissions['psicologia-reportes.view']->id,
             $permissions['dashboard.access']->id,
         ]);
-        $this->command->info("  ✓ Rol creado: {$editorRole->name}");
+        $this->command->info("  - Rol creado: {$editorRole->name}");
 
         // Rol Moderador - Permisos intermedios
         $moderatorRole = Role::updateOrCreate(
             ['slug' => 'moderator'],
             [
                 'name' => 'Moderador',
-                'description' => 'Rol con permisos de moderación y gestión básica.',
+                'description' => 'Rol con permisos de moderacion y gestion basica.',
             ]
         );
         $moderatorRole->permissions()->sync([
@@ -169,14 +169,33 @@ class RolePermissionSeeder extends Seeder
             $permissions['psicologia-reportes.view']->id,
             $permissions['dashboard.access']->id,
         ]);
-        $this->command->info("  ✓ Rol creado: {$moderatorRole->name}");
+        $this->command->info("  - Rol creado: {$moderatorRole->name}");
 
-        // Rol Usuario - Solo visualización básica
+        // Rol Psicologo - Solo permisos del modulo de psicologia
+        $psicologoRole = Role::updateOrCreate(
+            ['slug' => 'psicologo'],
+            [
+                'name' => 'Psicologo',
+                'description' => 'Rol con acceso solo al modulo de psicologia.',
+            ]
+        );
+        $psicologoRole->permissions()->sync([
+            $permissions['psicologia.view']->id,
+            $permissions['psicologia.create']->id,
+            $permissions['psicologia.edit']->id,
+            $permissions['psicologia.delete']->id,
+            $permissions['psicologia-alertas.view']->id,
+            $permissions['psicologia-reportes.view']->id,
+            $permissions['dashboard.access']->id,
+        ]);
+        $this->command->info("  - Rol creado: {$psicologoRole->name}");
+
+        // Rol Usuario - Solo visualizacion basica
         $userRole = Role::updateOrCreate(
             ['slug' => 'usuario'],
             [
                 'name' => 'Usuario',
-                'description' => 'Rol básico de usuario con permisos de solo lectura.',
+                'description' => 'Rol basico de usuario con permisos de solo lectura.',
             ]
         );
         $userRole->permissions()->sync([
@@ -187,12 +206,13 @@ class RolePermissionSeeder extends Seeder
             $permissions['psicologia-reportes.view']->id,
             $permissions['dashboard.access']->id,
         ]);
-        $this->command->info("  ✓ Rol creado: {$userRole->name}");
+        $this->command->info("  - Rol creado: {$userRole->name}");
 
         return [
             'admin' => $adminRole,
             'editor' => $editorRole,
             'moderator' => $moderatorRole,
+            'psicologo' => $psicologoRole,
             'usuario' => $userRole,
         ];
     }
@@ -214,7 +234,7 @@ class RolePermissionSeeder extends Seeder
             ]
         );
         $adminUser->syncRoles([$roles['admin']->id]);
-        $this->command->info("  ✓ Usuario creado: {$adminUser->name} ({$adminUser->email}) - Contraseña: password");
+        $this->command->info("  - Usuario creado: {$adminUser->name} ({$adminUser->email}) - Contrasena: password");
 
         // Usuario Editor
         $editorUser = User::updateOrCreate(
@@ -226,7 +246,7 @@ class RolePermissionSeeder extends Seeder
             ]
         );
         $editorUser->syncRoles([$roles['editor']->id]);
-        $this->command->info("  ✓ Usuario creado: {$editorUser->name} ({$editorUser->email}) - Contraseña: password");
+        $this->command->info("  - Usuario creado: {$editorUser->name} ({$editorUser->email}) - Contrasena: password");
 
         // Usuario Moderador
         $moderatorUser = User::updateOrCreate(
@@ -238,7 +258,7 @@ class RolePermissionSeeder extends Seeder
             ]
         );
         $moderatorUser->syncRoles([$roles['moderator']->id]);
-        $this->command->info("  ✓ Usuario creado: {$moderatorUser->name} ({$moderatorUser->email}) - Contraseña: password");
+        $this->command->info("  - Usuario creado: {$moderatorUser->name} ({$moderatorUser->email}) - Contrasena: password");
 
         // Usuario Regular
         $regularUser = User::updateOrCreate(
@@ -250,6 +270,6 @@ class RolePermissionSeeder extends Seeder
             ]
         );
         $regularUser->syncRoles([$roles['usuario']->id]);
-        $this->command->info("  ✓ Usuario creado: {$regularUser->name} ({$regularUser->email}) - Contraseña: password");
+        $this->command->info("  - Usuario creado: {$regularUser->name} ({$regularUser->email}) - Contrasena: password");
     }
 }

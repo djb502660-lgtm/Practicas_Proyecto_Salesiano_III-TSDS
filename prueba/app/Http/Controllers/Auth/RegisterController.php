@@ -31,6 +31,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['nullable', 'string', 'in:usuario,psicologo'],
         ]);
 
         $user = User::create([
@@ -39,6 +40,8 @@ class RegisterController extends Controller
             'password' => Hash::make($validated['password']),
         ]);
 
+        $user->assignRole($validated['role'] ?? 'usuario');
+
         event(new Registered($user));
 
         Auth::login($user);
@@ -46,4 +49,3 @@ class RegisterController extends Controller
         return redirect()->route('home');
     }
 }
-
