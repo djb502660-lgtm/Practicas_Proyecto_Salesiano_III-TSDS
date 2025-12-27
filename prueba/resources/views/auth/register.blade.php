@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Proyecto Saleciano Costa Norte</title>
+    <title>Registro - Proyecto salesiano</title>
     <link rel="icon" type="image/jpeg" href="{{ asset('assets/img/icono.jpeg')}}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
@@ -21,9 +21,9 @@
                     <div class="card-body" style="background-color: #ffffff;">
                         <div class="app-brand justify-content-center mb-4">
                             <div class="text-center mb-3">
-                                <img src="{{ asset('assets/img/icono.jpeg') }}" alt="Proyecto Saleciano" style="width: 80px; height: 80px; margin-bottom: 1rem;" />
+                                <img src="{{ asset('assets/img/icono.jpeg') }}" alt="Proyecto salesiano" style="width: 70px; height: 70px; margin-bottom: 1rem;" />
                             </div>
-                            <h2 style="color: #000000; text-align: center; margin-bottom: 2rem;">Proyecto Saleciano Costa Norte</h2>
+                            <h2 style="color: #000000; text-align: center; margin-bottom: 2rem; font-size: 1.5rem;">Proyecto salesiano</h2>
                         </div>
 
                         <h4 class="mb-2" style="color: #000000; text-align: center;">Crear Cuenta</h4>

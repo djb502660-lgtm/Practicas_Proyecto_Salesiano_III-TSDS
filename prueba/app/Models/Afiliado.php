@@ -17,6 +17,7 @@ class Afiliado extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'foto',
         'primer_nombre',
         'segundo_nombre',
         'primer_apellido',
@@ -42,7 +43,6 @@ class Afiliado extends Model
         'informacion_familiar',
         'ocupacion',
         'lugar_trabajo',
-        'cargo',
         'ingresos_mensuales',
         'tipo_empleo',
         'descripcion_laboral',
@@ -52,7 +52,6 @@ class Afiliado extends Model
         'estudiando_actualmente',
         'tiene_seguro_salud',
         'tipo_seguro_salud',
-        'eps',
         'condiciones_medicas',
         'medicamentos_permanentes',
         'alergias',
