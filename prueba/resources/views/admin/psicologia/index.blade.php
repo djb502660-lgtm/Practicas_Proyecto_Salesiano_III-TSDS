@@ -1,6 +1,6 @@
 @extends('layaout.app')
 
-@section('title', 'Mediciones')
+@section('title', 'Psicologia')
 
 @section('content')
     <div class="container-fluid">
@@ -9,11 +9,24 @@
                 <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
                     <div class="card-header" style="background-color: #ffffff; border-bottom: 1px solid #808080;">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="mb-0" style="color: #000000;">Registro de Mediciones</h4>
-                            <a href="{{ route('admin.mediciones.create') }}" class="btn"
-                                style="background-color: #dc3545; color: #ffffff; border: none;">
-                                <i class="bx bx-plus" style="color: #ffffff;"></i> Nueva Medición
-                            </a>
+                            <h4 class="mb-0" style="color: #000000;">Registro de Psicologia</h4>
+                            <div>
+                                <a href="{{ route('admin.psicologia.create') }}" class="btn"
+                                    style="background-color: #dc3545; color: #ffffff; border: none;">
+                                    <i class="bx bx-plus" style="color: #ffffff;"></i> Nuevo Registro
+                                </a>
+                                <a href="{{ route('admin.psicologia-alertas.index') }}" class="btn"
+                                    style="background-color: #808080; color: #ffffff; border: none;">
+                                    <i class="bx bx-alarm" style="color: #ffffff;"></i>
+                                    Alertas
+                                    @if($alertasPendientes > 0)
+                                        <span class="badge"
+                                            style="background-color: #dc3545; color: #ffffff; margin-left: 4px;">
+                                            {{ $alertasPendientes }}
+                                        </span>
+                                    @endif
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body" style="background-color: #ffffff;">
@@ -31,47 +44,49 @@
                                     <tr>
                                         <th style="color: #000000; border: 1px solid #808080;">ID</th>
                                         <th style="color: #000000; border: 1px solid #808080;">Destinatario</th>
-                                        <th style="color: #000000; border: 1px solid #808080;">Peso (kg)</th>
-                                        <th style="color: #000000; border: 1px solid #808080;">Talla (m)</th>
-                                        <th style="color: #000000; border: 1px solid #808080;">IMC</th>
-                                        <th style="color: #000000; border: 1px solid #808080;">Clasificación</th>
+                                        <th style="color: #000000; border: 1px solid #808080;">Tipo</th>
                                         <th style="color: #000000; border: 1px solid #808080;">Fecha</th>
+                                        <th style="color: #000000; border: 1px solid #808080;">Riesgo</th>
+                                        <th style="color: #000000; border: 1px solid #808080;">Registrado Por</th>
                                         <th style="color: #000000; border: 1px solid #808080;">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($mediciones as $medicion)
+                                    @forelse($registros as $registro)
                                         <tr>
-                                            <td style="color: #000000; border: 1px solid #808080;">{{ $medicion->id }}</td>
+                                            <td style="color: #000000; border: 1px solid #808080;">{{ $registro->id }}</td>
                                             <td style="color: #000000; border: 1px solid #808080;">
-                                                {{ $medicion->destinatario->nombre_completo }}</td>
+                                                {{ $registro->destinatario->nombre_completo }}</td>
+                                            <td style="color: #000000; border: 1px solid #808080;">{{ $registro->tipo_label }}
+                                            </td>
                                             <td style="color: #000000; border: 1px solid #808080;">
-                                                {{ number_format($medicion->peso, 2) }}</td>
-                                            <td style="color: #000000; border: 1px solid #808080;">
-                                                {{ number_format($medicion->talla, 2) }}</td>
-                                            <td style="color: #000000; border: 1px solid #808080;">
-                                                {{ number_format($medicion->imc, 2) }}</td>
+                                                {{ $registro->fecha_registro->format('d/m/Y') }}</td>
                                             <td style="color: #000000; border: 1px solid #808080;">
                                                 <span class="badge"
-                                                    style="background-color: {{ $medicion->clasificacion_color }}; color: #ffffff; border: 1px solid #808080;">
-                                                    {{ $medicion->clasificacion_label }}
+                                                    style="background-color: {{ $registro->nivel_riesgo_color }}; color: #ffffff; border: 1px solid #808080;">
+                                                    {{ $registro->nivel_riesgo_label }}
                                                 </span>
                                             </td>
                                             <td style="color: #000000; border: 1px solid #808080;">
-                                                {{ $medicion->fecha_medicion->format('d/m/Y') }}</td>
+                                                {{ $registro->user->name ?? 'N/A' }}</td>
                                             <td style="color: #000000; border: 1px solid #808080;">
                                                 <div class="btn-group" role="group">
-                                                    <a href="{{ route('admin.mediciones.show', $medicion) }}" class="btn btn-sm"
+                                                    <a href="{{ route('admin.psicologia.show', $registro) }}" class="btn btn-sm"
                                                         style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
                                                         <i class="bx bx-show" style="color: #ffffff;"></i>
                                                     </a>
-                                                    <a href="{{ route('admin.mediciones.edit', $medicion) }}" class="btn btn-sm"
+                                                    <a href="{{ route('admin.psicologia.edit', $registro) }}" class="btn btn-sm"
                                                         style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
                                                         <i class="bx bx-edit" style="color: #ffffff;"></i>
                                                     </a>
-                                                    <form action="{{ route('admin.mediciones.destroy', $medicion) }}"
+                                                    <a href="{{ route('admin.psicologia.report', $registro->destinatario) }}"
+                                                        class="btn btn-sm"
+                                                        style="background-color: #808080; color: #ffffff; border: 1px solid #808080;">
+                                                        <i class="bx bx-file" style="color: #ffffff;"></i>
+                                                    </a>
+                                                    <form action="{{ route('admin.psicologia.destroy', $registro) }}"
                                                         method="POST" class="d-inline"
-                                                        onsubmit="return confirm('¿Estás seguro de eliminar esta medición?');">
+                                                        onsubmit="return confirm('Esta seguro de eliminar este registro?');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm"
@@ -84,9 +99,9 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="8" class="text-center"
-                                                style="color: #000000; border: 1px solid #808080;">No hay mediciones
-                                                registradas.</td>
+                                            <td colspan="7" class="text-center"
+                                                style="color: #000000; border: 1px solid #808080;">No hay registros de
+                                                psicologia.</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -94,7 +109,7 @@
                         </div>
 
                         <div class="d-flex justify-content-center mt-3">
-                            {{ $mediciones->links() }}
+                            {{ $registros->links() }}
                         </div>
                     </div>
                 </div>

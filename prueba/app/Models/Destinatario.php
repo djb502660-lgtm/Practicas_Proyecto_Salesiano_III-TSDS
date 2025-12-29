@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Afiliado extends Model
+/**
+ * @property \Carbon\Carbon $fecha_nacimiento
+ */
+class Destinatario extends Model
 {
     use HasFactory;
 
@@ -81,7 +84,7 @@ class Afiliado extends Model
     }
 
     /**
-     * Get the user that registered the afiliado.
+     * Get the user that registered the destinatario.
      */
     public function user(): BelongsTo
     {
@@ -89,7 +92,7 @@ class Afiliado extends Model
     }
 
     /**
-     * Get the full name of the afiliado.
+     * Get the full name of the destinatario.
      */
     public function getNombreCompletoAttribute(): string
     {
@@ -100,7 +103,7 @@ class Afiliado extends Model
     }
 
     /**
-     * Get the age of the afiliado.
+     * Get the age of the destinatario.
      */
     public function getEdadAttribute(): int
     {
@@ -108,7 +111,7 @@ class Afiliado extends Model
     }
 
     /**
-     * Get the mediciones for the afiliado.
+     * Get the mediciones for the destinatario.
      */
     public function mediciones(): HasMany
     {
@@ -116,7 +119,7 @@ class Afiliado extends Model
     }
 
     /**
-     * Get the latest medicion for the afiliado.
+     * Get the latest medicion for the destinatario.
      */
     public function ultimaMedicion(): ?Medicion
     {

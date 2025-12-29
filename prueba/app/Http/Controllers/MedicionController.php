@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMedicionRequest;
 use App\Http\Requests\UpdateMedicionRequest;
-use App\Models\Afiliado;
+use App\Models\Destinatario;
 use App\Models\Medicion;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -16,7 +16,7 @@ class MedicionController extends Controller
      */
     public function index(): View
     {
-        $mediciones = Medicion::with(['destinatarios', 'user'])
+        $mediciones = Medicion::with(['destinatario', 'user'])
             ->latest('fecha_medicion')
             ->paginate(15);
 
@@ -28,11 +28,11 @@ class MedicionController extends Controller
      */
     public function create(): View
     {
-        $afiliados = Afiliado::where('estado', 'activo')
+        $destinatarios = Destinatario::where('estado', 'activo')
             ->orderBy('primer_nombre')
             ->get();
 
-        return view('admin.mediciones.create', compact('afiliados'));
+        return view('admin.mediciones.create', compact('destinatarios'));
     }
 
     /**
@@ -44,7 +44,7 @@ class MedicionController extends Controller
         $clasificacion = $this->obtenerClasificacion($imc);
 
         $medicion = Medicion::create([
-            'destinatario_id' => $request->afiliado_id,
+            'destinatario_id' => $request->destinatario_id,
             'peso' => $request->peso,
             'talla' => $request->talla,
             'imc' => $imc,
@@ -63,7 +63,7 @@ class MedicionController extends Controller
      */
     public function show(Medicion $medicion): View
     {
-        $medicion->load(['afiliado', 'user']);
+        $medicion->load(['destinatario', 'user']);
 
         return view('admin.mediciones.show', compact('medicion'));
     }
@@ -73,13 +73,13 @@ class MedicionController extends Controller
      */
     public function edit(Medicion $medicion): View
     {
-        $afiliados = Afiliado::where('estado', 'activo')
+        $destinatarios = Destinatario::where('estado', 'activo')
             ->orderBy('primer_nombre')
             ->get();
 
-        $medicion->load('afiliado');
+        $medicion->load('destinatario');
 
-        return view('admin.mediciones.edit', compact('medicion', 'afiliados'));
+        return view('admin.mediciones.edit', compact('medicion', 'destinatarios'));
     }
 
     /**
@@ -91,7 +91,7 @@ class MedicionController extends Controller
         $clasificacion = $this->obtenerClasificacion($imc);
 
         $medicion->update([
-            'afiliado_id' => $request->afiliado_id,
+            'destinatario_id' => $request->destinatario_id,
             'peso' => $request->peso,
             'talla' => $request->talla,
             'imc' => $imc,

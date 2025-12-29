@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AfiliadoController;
+use App\Http\Controllers\DestinatarioController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function (): void {
         Route::resource('users', UserController::class);
         Route::resource('roles', RoleController::class);
         Route::resource('permissions', PermissionController::class);
-        Route::resource('afiliados', AfiliadoController::class);
+        Route::resource('destinatarios', DestinatarioController::class);
         Route::resource('mediciones', MedicionController::class)->parameters([
             'mediciones' => 'medicion',
         ]);

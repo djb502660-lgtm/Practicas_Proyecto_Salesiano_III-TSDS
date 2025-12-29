@@ -22,7 +22,7 @@ class UpdateMedicionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'afiliado_id' => ['required', 'exists:afiliados,id'],
+            'destinatario_id' => ['required', 'exists:destinatarios,id'],
             'peso' => ['required', 'numeric', 'min:1', 'max:300'],
             'talla' => ['required', 'numeric', 'min:0.5', 'max:2.5'],
             'observaciones' => ['nullable', 'string'],
@@ -38,8 +38,8 @@ class UpdateMedicionRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'afiliado_id.required' => 'Debe seleccionar un afiliado.',
-            'afiliado_id.exists' => 'El afiliado seleccionado no existe.',
+            'destinatario_id.required' => 'Debe seleccionar un destinatario.',
+            'destinatario_id.exists' => 'El destinatario seleccionado no existe.',
             'peso.required' => 'El peso es obligatorio.',
             'peso.numeric' => 'El peso debe ser un número válido.',
             'peso.min' => 'El peso debe ser mayor a 1 kg.',

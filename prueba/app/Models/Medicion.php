@@ -23,7 +23,7 @@ class Medicion extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'afiliado_id',
+        'destinatario_id',
         'peso',
         'talla',
         'imc',
@@ -49,11 +49,11 @@ class Medicion extends Model
     }
 
     /**
-     * Get the afiliado that owns the medicion.
+     * Get the destinatario that owns the medicion.
      */
-    public function afiliado(): BelongsTo
+    public function destinatario(): BelongsTo
     {
-        return $this->belongsTo(Afiliado::class);
+        return $this->belongsTo(Destinatario::class);
     }
 
     /**

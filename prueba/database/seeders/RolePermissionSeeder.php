@@ -55,11 +55,11 @@ class RolePermissionSeeder extends Seeder
             ['name' => 'Editar Permisos', 'slug' => 'permissions.edit', 'description' => 'Permite editar permisos existentes'],
             ['name' => 'Eliminar Permisos', 'slug' => 'permissions.delete', 'description' => 'Permite eliminar permisos'],
 
-            // Permisos de Afiliados
-            ['name' => 'Ver Afiliados', 'slug' => 'afiliados.view', 'description' => 'Permite ver la lista de afiliados'],
-            ['name' => 'Crear Afiliados', 'slug' => 'afiliados.create', 'description' => 'Permite crear nuevos afiliados'],
-            ['name' => 'Editar Afiliados', 'slug' => 'afiliados.edit', 'description' => 'Permite editar afiliados existentes'],
-            ['name' => 'Eliminar Afiliados', 'slug' => 'afiliados.delete', 'description' => 'Permite eliminar afiliados'],
+            // Permisos de Destinatarios
+            ['name' => 'Ver Destinatarios', 'slug' => 'destinatarios.view', 'description' => 'Permite ver la lista de destinatarios'],
+            ['name' => 'Crear Destinatarios', 'slug' => 'destinatarios.create', 'description' => 'Permite crear nuevos destinatarios'],
+            ['name' => 'Editar Destinatarios', 'slug' => 'destinatarios.edit', 'description' => 'Permite editar destinatarios existentes'],
+            ['name' => 'Eliminar Destinatarios', 'slug' => 'destinatarios.delete', 'description' => 'Permite eliminar destinatarios'],
 
             // Permisos de Mediciones
             ['name' => 'Ver Mediciones', 'slug' => 'mediciones.view', 'description' => 'Permite ver la lista de mediciones'],
@@ -116,9 +116,9 @@ class RolePermissionSeeder extends Seeder
             $permissions['users.edit']->id,
             $permissions['roles.view']->id,
             $permissions['permissions.view']->id,
-            $permissions['afiliados.view']->id,
-            $permissions['afiliados.create']->id,
-            $permissions['afiliados.edit']->id,
+            $permissions['destinatarios.view']->id,
+            $permissions['destinatarios.create']->id,
+            $permissions['destinatarios.edit']->id,
             $permissions['mediciones.view']->id,
             $permissions['mediciones.create']->id,
             $permissions['mediciones.edit']->id,
@@ -140,10 +140,10 @@ class RolePermissionSeeder extends Seeder
             $permissions['users.assign-roles']->id,
             $permissions['roles.view']->id,
             $permissions['permissions.view']->id,
-            $permissions['afiliados.view']->id,
-            $permissions['afiliados.create']->id,
-            $permissions['afiliados.edit']->id,
-            $permissions['afiliados.delete']->id,
+            $permissions['destinatarios.view']->id,
+            $permissions['destinatarios.create']->id,
+            $permissions['destinatarios.edit']->id,
+            $permissions['destinatarios.delete']->id,
             $permissions['mediciones.view']->id,
             $permissions['mediciones.create']->id,
             $permissions['mediciones.edit']->id,
@@ -162,7 +162,7 @@ class RolePermissionSeeder extends Seeder
         );
         $userRole->permissions()->sync([
             $permissions['users.view']->id,
-            $permissions['afiliados.view']->id,
+            $permissions['destinatarios.view']->id,
             $permissions['mediciones.view']->id,
             $permissions['dashboard.access']->id,
         ]);

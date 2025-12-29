@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('destinatarios', function (Blueprint $table) {
             $table->id();
+            $table->string('foto')->nullable();
 
             // Datos Personales
             $table->string('primer_nombre');
@@ -58,6 +59,8 @@ return new class extends Migration {
 
             // Datos de Salud
             $table->boolean('tiene_seguro_salud')->default(true);
+            $table->string('tipo_seguro_salud')->nullable();
+            $table->string('eps')->nullable();
             $table->text('condiciones_medicas')->nullable();
             $table->text('medicamentos_permanentes')->nullable();
             $table->text('alergias')->nullable();

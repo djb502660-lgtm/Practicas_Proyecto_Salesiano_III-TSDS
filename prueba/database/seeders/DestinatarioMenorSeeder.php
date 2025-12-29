@@ -2,22 +2,22 @@
 
 namespace Database\Seeders;
 
-use App\Models\Afiliado;
+use App\Models\Destinatario;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class AfiliadoMenorSeeder extends Seeder
+class DestinatarioMenorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $this->command->info('Creando afiliados menores de edad (17 años o menos)...');
+        $this->command->info('Creando destinatarios menores de edad (17 años o menos)...');
 
         $adminUser = User::where('email', 'admin@example.com')->first();
 
-        $afiliadosMenores = [
+        $destinatariosMenores = [
             [
                 'primer_nombre' => 'Santiago',
                 'segundo_nombre' => 'Andrés',
@@ -470,13 +470,13 @@ class AfiliadoMenorSeeder extends Seeder
             ],
         ];
 
-        foreach ($afiliadosMenores as $afiliadoData) {
-            $afiliado = Afiliado::create($afiliadoData);
-            $edad = $afiliado->edad;
-            $this->command->info("  ✓ Afiliado menor creado: {$afiliado->nombre_completo} ({$edad} años)");
+        foreach ($destinatariosMenores as $destinatarioData) {
+            $destinatario = Destinatario::create($destinatarioData);
+            $edad = $destinatario->edad;
+            $this->command->info("  ✓ Destinatario menor creado: {$destinatario->nombre_completo} ({$edad} años)");
         }
 
-        $this->command->info('¡Seeder de afiliados menores completado exitosamente!');
+        $this->command->info('¡Seeder de destinatarios menores completado exitosamente!');
     }
 }
 

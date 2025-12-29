@@ -54,10 +54,10 @@
                             <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
                                 <div class="card-body text-center">
                                     <i class="bx bx-group" style="font-size: 3rem; color: #dc3545;"></i>
-                                    <h5 class="mt-3" style="color: #000000;">Afiliados</h5>
+                                    <h5 class="mt-3" style="color: #000000;">destinatarios</h5>
                                     <p class="text-muted" style="color: #000000;">Gestiona las fichas socioeconómicas</p>
-                                    <a href="{{ route('admin.afiliados.index') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
-                                        <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Afiliados
+                                    <a href="{{ route('admin.destinatarios.index') }}" class="btn" style="background-color: #dc3545; color: #ffffff; border: none;">
+                                        <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver destinatarios
                                     </a>
                                 </div>
                             </div>

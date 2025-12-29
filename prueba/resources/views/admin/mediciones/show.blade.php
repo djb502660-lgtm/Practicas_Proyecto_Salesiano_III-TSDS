@@ -25,12 +25,12 @@
                         <div class="col-md-6">
                             <div class="card" style="background-color: #f8f9fa; border: 1px solid #808080;">
                                 <div class="card-body">
-                                    <h5 style="color: #000000;"><i class="bx bx-user" style="color: #dc3545;"></i> Información del Afiliado</h5>
+                                    <h5 style="color: #000000;"><i class="bx bx-user" style="color: #dc3545;"></i> Información del destinatario</h5>
                                     <hr style="border-color: #808080;">
-                                    <p style="color: #000000;"><strong>Nombre:</strong> {{ $medicion->afiliado->nombre_completo }}</p>
-                                    <p style="color: #000000;"><strong>Documento:</strong> {{ $medicion->afiliado->numero_documento }}</p>
-                                    <p style="color: #000000;"><strong>Edad:</strong> {{ $medicion->afiliado->edad }} años</p>
-                                    <p style="color: #000000;"><strong>Género:</strong> {{ ucfirst($medicion->afiliado->genero) }}</p>
+                                    <p style="color: #000000;"><strong>Nombre:</strong> {{ $medicion->destinatario->nombre_completo }}</p>
+                                    <p style="color: #000000;"><strong>Documento:</strong> {{ $medicion->destinatario->numero_documento }}</p>
+                                    <p style="color: #000000;"><strong>Edad:</strong> {{ $medicion->destinatario->edad }} años</p>
+                                    <p style="color: #000000;"><strong>Género:</strong> {{ ucfirst($medicion->destinatario->genero) }}</p>
                                 </div>
                             </div>
                         </div>

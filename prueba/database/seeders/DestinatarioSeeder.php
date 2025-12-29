@@ -2,22 +2,22 @@
 
 namespace Database\Seeders;
 
-use App\Models\Afiliado;
+use App\Models\Destinatario;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class AfiliadoSeeder extends Seeder
+class DestinatarioSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $this->command->info('Creando afiliados de ejemplo...');
+        $this->command->info('Creando destinatarios de ejemplo...');
 
         $adminUser = User::where('email', 'admin@example.com')->first();
 
-        $afiliados = [
+        $destinatarios = [
             [
                 'primer_nombre' => 'Juan',
                 'segundo_nombre' => 'Carlos',
@@ -58,7 +58,7 @@ class AfiliadoSeeder extends Seeder
                 'condiciones_medicas' => 'Ninguna condición médica relevante.',
                 'medicamentos_permanentes' => 'Ninguno',
                 'alergias' => 'Polen',
-                'observaciones' => 'Afiliado activo desde hace 3 años.',
+                'observaciones' => 'Destinatario activo desde hace 3 años.',
                 'estado' => 'activo',
                 'fecha_registro' => now()->subYears(3),
                 'user_id' => $adminUser?->id,
@@ -245,12 +245,12 @@ class AfiliadoSeeder extends Seeder
             ],
         ];
 
-        foreach ($afiliados as $afiliadoData) {
-            $afiliado = Afiliado::create($afiliadoData);
-            $this->command->info("  ✓ Afiliado creado: {$afiliado->nombre_completo}");
+        foreach ($destinatarios as $destinatarioData) {
+            $destinatario = Destinatario::create($destinatarioData);
+            $this->command->info("  ✓ Destinatario creado: {$destinatario->nombre_completo}");
         }
 
-        $this->command->info('¡Seeder de afiliados completado exitosamente!');
+        $this->command->info('¡Seeder de destinatarios completado exitosamente!');
     }
 }
 

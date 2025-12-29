@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateAfiliadoRequest extends FormRequest
+class StoreDestinatarioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +21,6 @@ class UpdateAfiliadoRequest extends FormRequest
      */
     public function rules(): array
     {
-        $afiliadoId = $this->route('afiliado');
-
         return [
             'primer_nombre' => ['required', 'string', 'max:255'],
             'segundo_nombre' => ['nullable', 'string', 'max:255'],
@@ -34,7 +31,7 @@ class UpdateAfiliadoRequest extends FormRequest
             'estado_civil' => ['required', 'in:soltero,casado,divorciado,viudo,union_libre'],
             'nacionalidad' => ['required', 'string', 'max:255'],
             'tipo_documento' => ['required', 'in:cedula,pasaporte,tarjeta_identidad,cedula_extranjeria'],
-            'numero_documento' => ['required', 'string', 'max:255', Rule::unique('afiliados')->ignore($afiliadoId)],
+            'numero_documento' => ['required', 'string', 'max:255', 'unique:destinatarios'],
             'telefono' => ['nullable', 'string', 'max:20'],
             'celular' => ['nullable', 'string', 'max:20'],
             'email' => ['nullable', 'email', 'max:255'],

@@ -35,13 +35,19 @@ class DestinatarioController extends Controller
      */
     public function store(StoreDestinatarioRequest $request): RedirectResponse
     {
-        $destinatario = destinatario::create([
-            ...$request->validated(),
+        $data = $request->validated();
+
+        if ($request->hasFile('foto')) {
+            $data['foto'] = $request->file('foto')->store('destinatarios/fotos', 'public');
+        }
+
+        $destinatario = Destinatario::create([
+            ...$data,
             'user_id' => auth()->id(),
         ]);
 
         return redirect()->route('admin.destinatarios.index')
-            ->with('success', 'destinatario creado exitosamente.');
+            ->with('success', 'Destinatario creado exitosamente.');
     }
 
     /**
@@ -67,7 +73,17 @@ class DestinatarioController extends Controller
      */
     public function update(UpdateDestinatarioRequest $request, Destinatario $destinatario): RedirectResponse
     {
-        $destinatario->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('foto')) {
+            // Eliminar foto anterior si existe
+            if ($destinatario->foto) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($destinatario->foto);
+            }
+            $data['foto'] = $request->file('foto')->store('destinatarios/fotos', 'public');
+        }
+
+        $destinatario->update($data);
 
         return redirect()->route('admin.destinatarios.index')
             ->with('success', 'Destinatario actualizado exitosamente.');
@@ -84,3 +100,4 @@ class DestinatarioController extends Controller
             ->with('success', 'Destinatario eliminado exitosamente.');
     }
 }
+
