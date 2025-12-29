@@ -19,7 +19,7 @@ class AfiliadoController extends Controller
             ->latest()
             ->paginate(15);
 
-        return view('admin.afiliados.index', compact('afiliados'));
+        return view('admin.destinatarios.index', compact('destinatarios'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AfiliadoController extends Controller
      */
     public function create(): View
     {
-        return view('admin.afiliados.create');
+        return view('admin.destinatarios.create');
     }
 
     /**
@@ -40,8 +40,8 @@ class AfiliadoController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('admin.afiliados.index')
-            ->with('success', 'Afiliado creado exitosamente.');
+        return redirect()->route('admin.destinatarios.index')
+            ->with('success', 'destinatario creado exitosamente.');
     }
 
     /**

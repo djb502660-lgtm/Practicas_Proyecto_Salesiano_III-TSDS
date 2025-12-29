@@ -16,7 +16,7 @@ class MedicionController extends Controller
      */
     public function index(): View
     {
-        $mediciones = Medicion::with(['afiliado', 'user'])
+        $mediciones = Medicion::with(['destinatarios', 'user'])
             ->latest('fecha_medicion')
             ->paginate(15);
 
@@ -44,7 +44,7 @@ class MedicionController extends Controller
         $clasificacion = $this->obtenerClasificacion($imc);
 
         $medicion = Medicion::create([
-            'afiliado_id' => $request->afiliado_id,
+            'destinatario_id' => $request->afiliado_id,
             'peso' => $request->peso,
             'talla' => $request->talla,
             'imc' => $imc,

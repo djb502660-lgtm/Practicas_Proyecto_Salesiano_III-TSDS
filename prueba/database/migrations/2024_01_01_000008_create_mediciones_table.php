@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,7 +12,7 @@ return new class extends Migration
     {
         Schema::create('mediciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('afiliado_id')->constrained()->onDelete('cascade');
+            $table->foreignId('destinatario_id')->constrained()->onDelete('cascade');
             $table->decimal('peso', 5, 2)->comment('Peso en kilogramos');
             $table->decimal('talla', 3, 2)->comment('Talla en metros');
             $table->decimal('imc', 5, 2)->nullable()->comment('Índice de Masa Corporal calculado');
@@ -23,7 +22,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
 
-            $table->index('afiliado_id');
+            $table->index('destinatario_id');
             $table->index('fecha_medicion');
         });
     }
