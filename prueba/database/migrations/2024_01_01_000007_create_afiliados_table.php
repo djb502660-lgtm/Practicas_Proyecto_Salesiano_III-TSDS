@@ -58,7 +58,6 @@ return new class extends Migration {
 
             // Datos de Salud
             $table->boolean('tiene_seguro_salud')->default(true);
-            $table->string('tipo_seguro_salud')->nullable();
             $table->text('condiciones_medicas')->nullable();
             $table->text('medicamentos_permanentes')->nullable();
             $table->text('alergias')->nullable();

@@ -19,7 +19,7 @@ class AfiliadoController extends Controller
             ->latest()
             ->paginate(15);
 
-        return view('admin.destinatarios.index', compact('destinatarios'));
+        return view('admin.afiliados.index', compact('afiliados'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AfiliadoController extends Controller
      */
     public function create(): View
     {
-        return view('admin.destinatarios.create');
+        return view('admin.afiliados.create');
     }
 
     /**
