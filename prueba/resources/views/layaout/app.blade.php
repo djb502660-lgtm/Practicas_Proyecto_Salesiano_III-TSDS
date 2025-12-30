@@ -59,44 +59,64 @@
 
                     @auth
                         <!-- Usuarios -->
-                        <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.users.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-user" style="color: #dc3545;"></i>
-                                <div data-i18n="Usuarios" style="color: #000000;">Usuarios</div>
-                            </a>
-                        </li>
+                        @if(auth()->user()->hasPermission('users.view'))
+                            <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.users.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-user" style="color: #dc3545;"></i>
+                                    <div data-i18n="Usuarios" style="color: #000000;">Usuarios</div>
+                                </a>
+                            </li>
+                        @endif
 
                         <!-- Roles -->
-                        <li class="menu-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.roles.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-shield" style="color: #dc3545;"></i>
-                                <div data-i18n="Roles" style="color: #000000;">Roles</div>
-                            </a>
-                        </li>
+                        @if(auth()->user()->hasPermission('roles.view'))
+                            <li class="menu-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.roles.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-shield" style="color: #dc3545;"></i>
+                                    <div data-i18n="Roles" style="color: #000000;">Roles</div>
+                                </a>
+                            </li>
+                        @endif
 
                         <!-- Destinatarios -->
-                        <li class="menu-item {{ request()->routeIs('admin.destinatarios.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.destinatarios.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-group" style="color: #dc3545;"></i>
-                                <div data-i18n="Destinatarios" style="color: #000000;">Destinatarios</div>
-                            </a>
-                        </li>
+                        @if(auth()->user()->hasPermission('destinatarios.view'))
+                            <li class="menu-item {{ request()->routeIs('admin.destinatarios.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.destinatarios.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-group" style="color: #dc3545;"></i>
+                                    <div data-i18n="Destinatarios" style="color: #000000;">Destinatarios</div>
+                                </a>
+                            </li>
+                        @endif
 
                         <!-- Mediciones -->
-                        <li class="menu-item {{ request()->routeIs('admin.mediciones.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.mediciones.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-line-chart" style="color: #dc3545;"></i>
-                                <div data-i18n="Mediciones" style="color: #000000;">Mediciones</div>
-                            </a>
-                        </li>
+                        @if(auth()->user()->hasPermission('mediciones.view'))
+                            <li class="menu-item {{ request()->routeIs('admin.mediciones.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.mediciones.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-line-chart" style="color: #dc3545;"></i>
+                                    <div data-i18n="Mediciones" style="color: #000000;">Mediciones</div>
+                                </a>
+                            </li>
+                        @endif
 
                         <!-- Psicología -->
-                        <li class="menu-item {{ request()->routeIs('admin.psicologia.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.psicologia.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-brain" style="color: #dc3545;"></i>
-                                <div data-i18n="Psicología" style="color: #000000;">Psicología</div>
-                            </a>
-                        </li>
+                        @if(auth()->user()->hasPermission('psicologia.view'))
+                            <li class="menu-item {{ request()->routeIs('admin.psicologia.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.psicologia.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-brain" style="color: #dc3545;"></i>
+                                    <div data-i18n="Psicología" style="color: #000000;">Psicología</div>
+                                </a>
+                            </li>
+                        @endif
+
+                        <!-- Educador -->
+                        @if(auth()->user()->hasPermission('educador.view'))
+                            <li class="menu-item {{ request()->routeIs('admin.educador.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.educador.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-book-open" style="color: #dc3545;"></i>
+                                    <div data-i18n="Educador" style="color: #000000;">Educador</div>
+                                </a>
+                            </li>
+                        @endif
                     @endauth
                 </ul>
             </aside>

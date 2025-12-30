@@ -31,11 +31,23 @@ Route::middleware(['auth'])->group(function (): void {
         Route::resource('mediciones', MedicionController::class)->parameters([
             'mediciones' => 'medicion',
         ]);
+        Route::resource('psicologia', \App\Http\Controllers\PsicologiaController::class)->parameters([
+            'psicologia' => 'psicologia',
+        ]);
+        Route::resource('educador', \App\Http\Controllers\EducadorSeguimientoController::class)->parameters([
+            'educador' => 'educador',
+        ]);
+        Route::get('psicologia-reporte/{destinatario}', [\App\Http\Controllers\PsicologiaController::class, 'report'])->name('psicologia.report');
+        Route::get('psicologia-alertas', [\App\Http\Controllers\PsicologiaController::class, 'alertasIndex'])->name('psicologia-alertas.index');
     });
 });
 
 Route::prefix('psicologia')->name('psicologia.')->group(function () {
     Route::get('/perfil', [\App\Http\Controllers\modulo_psicologia\PerfilController::class, 'index'])->name('perfil');
+});
+
+Route::prefix('educador')->name('educador.')->group(function () {
+    Route::get('/perfil', [\App\Http\Controllers\Modulo_educador\PerfilController::class, 'index'])->name('perfil');
 });
 
 

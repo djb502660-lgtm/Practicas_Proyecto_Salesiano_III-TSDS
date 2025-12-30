@@ -8,18 +8,25 @@ use App\Models\Destinatario;
 use App\Models\Psicologia;
 use App\Models\PsicologiaAlerta;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\View\View;
 
-class PsicologiaController extends Controller
+class PsicologiaController extends Controller implements HasMiddleware
 {
-    public function __construct()
+    /**
+     * Get the middleware that should be assigned to the controller.
+     */
+    public static function middleware(): array
     {
-        $this->middleware('permission:psicologia.view')->only(['index', 'show']);
-        $this->middleware('permission:psicologia.create')->only(['create', 'store']);
-        $this->middleware('permission:psicologia.edit')->only(['edit', 'update']);
-        $this->middleware('permission:psicologia.delete')->only(['destroy']);
-        $this->middleware('permission:psicologia-reportes.view')->only(['report']);
-        $this->middleware('permission:psicologia-alertas.view')->only(['alertasIndex']);
+        return [
+            new Middleware('permission:psicologia.view', only: ['index', 'show']),
+            new Middleware('permission:psicologia.create', only: ['create', 'store']),
+            new Middleware('permission:psicologia.edit', only: ['edit', 'update']),
+            new Middleware('permission:psicologia.delete', only: ['destroy']),
+            new Middleware('permission:psicologia-reportes.view', only: ['report']),
+            new Middleware('permission:psicologia-alertas.view', only: ['alertasIndex']),
+        ];
     }
 
     /**

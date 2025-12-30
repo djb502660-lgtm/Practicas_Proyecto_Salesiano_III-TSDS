@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             DestinatarioSeeder::class,
             DestinatarioMenorSeeder::class,
             MedicionSeeder::class,
+            EducadorProfileSeeder::class,
+            EducadorSeguimientoSeeder::class,
         ]);
     }
 }
