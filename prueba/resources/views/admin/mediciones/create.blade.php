@@ -23,7 +23,7 @@
                                         style="border: 1px solid #808080; color: #000000;">
                                         <option value="">Seleccione un Destinatario...</option>
                                         @foreach($destinatarios as $destinatario)
-                                            <option value="{{ $destinatario->id }}" {{ old('destinatario_id') == $destinatario->id ? 'selected' : '' }}>
+                                            <option value="{{ $destinatario->id }}" {{ (old('destinatario_id') ?? $selected_destinatario_id) == $destinatario->id ? 'selected' : '' }}>
                                                 {{ $destinatario->nombre_completo }} - {{ $destinatario->numero_documento }}
                                             </option>
                                         @endforeach
@@ -142,9 +142,9 @@
                 }
 
                 resultadoDiv.innerHTML = `
-                <p><strong>IMC:</strong> <span style="font-size: 1.2em; color: ${color};">${imcRedondeado}</span></p>
-                <p><strong>Clasificación:</strong> <span style="color: ${color}; font-weight: bold;">${clasificacion}</span></p>
-            `;
+                    <p><strong>IMC:</strong> <span style="font-size: 1.2em; color: ${color};">${imcRedondeado}</span></p>
+                    <p><strong>Clasificación:</strong> <span style="color: ${color}; font-weight: bold;">${clasificacion}</span></p>
+                `;
             } else {
                 resultadoDiv.innerHTML = '<p>Complete los campos de peso y talla para calcular el IMC</p>';
             }

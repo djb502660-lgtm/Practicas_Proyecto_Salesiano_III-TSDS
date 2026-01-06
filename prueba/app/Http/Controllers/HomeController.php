@@ -13,7 +13,6 @@ class HomeController extends Controller
             'destinatarios' => \App\Models\Destinatario::count(),
             'mediciones' => \App\Models\Medicion::count(),
             'psicologia' => \App\Models\Psicologia::count(),
-            'educador' => \App\Models\EducadorSeguimiento::count(),
         ];
 
         return view('home.home', compact('stats'));

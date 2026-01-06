@@ -65,6 +65,14 @@ class Medicion extends Model
     }
 
     /**
+     * Get the follow-up record for this measurement.
+     */
+    public function seguimiento()
+    {
+        return $this->hasOne(SeguimientoMedicion::class);
+    }
+
+    /**
      * Calculate IMC based on weight and height.
      */
     public function calcularIMC(): float

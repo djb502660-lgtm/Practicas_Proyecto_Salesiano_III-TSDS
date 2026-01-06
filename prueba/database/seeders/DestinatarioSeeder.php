@@ -53,8 +53,8 @@ class DestinatarioSeeder extends Seeder
                 'titulo_obtenido' => 'Ingeniero de Sistemas',
                 'estudiando_actualmente' => false,
                 'tiene_seguro_salud' => true,
-                'tipo_seguro_salud' => 'EPS',
-                'eps' => 'Sura',
+                'tipo_seguro_salud' => '',
+       
                 'condiciones_medicas' => 'Ninguna condición médica relevante.',
                 'medicamentos_permanentes' => 'Ninguno',
                 'alergias' => 'Polen',
@@ -98,8 +98,8 @@ class DestinatarioSeeder extends Seeder
                 'titulo_obtenido' => 'Diseñadora Gráfica',
                 'estudiando_actualmente' => true,
                 'tiene_seguro_salud' => true,
-                'tipo_seguro_salud' => 'EPS',
-                'eps' => 'Nueva EPS',
+                'tipo_seguro_salud' => '',
+              
                 'condiciones_medicas' => null,
                 'medicamentos_permanentes' => null,
                 'alergias' => null,
@@ -144,7 +144,7 @@ class DestinatarioSeeder extends Seeder
                 'estudiando_actualmente' => false,
                 'tiene_seguro_salud' => true,
                 'tipo_seguro_salud' => 'Subsidiado',
-                'eps' => 'Sisbén',
+               
                 'condiciones_medicas' => 'Hipertensión',
                 'medicamentos_permanentes' => 'Losartan 50mg diario',
                 'alergias' => null,
@@ -188,8 +188,8 @@ class DestinatarioSeeder extends Seeder
                 'titulo_obtenido' => 'Técnico en Enfermería',
                 'estudiando_actualmente' => true,
                 'tiene_seguro_salud' => true,
-                'tipo_seguro_salud' => 'EPS',
-                'eps' => 'Sanitas',
+                'tipo_seguro_salud' => '',
+            
                 'condiciones_medicas' => null,
                 'medicamentos_permanentes' => null,
                 'alergias' => 'Penicilina',
@@ -233,8 +233,8 @@ class DestinatarioSeeder extends Seeder
                 'titulo_obtenido' => 'Bachiller',
                 'estudiando_actualmente' => false,
                 'tiene_seguro_salud' => true,
-                'tipo_seguro_salud' => 'EPS',
-                'eps' => 'Comfenalco',
+                'tipo_seguro_salud' => '',
+               
                 'condiciones_medicas' => 'Diabetes tipo 2',
                 'medicamentos_permanentes' => 'Metformina 500mg dos veces al día',
                 'alergias' => null,

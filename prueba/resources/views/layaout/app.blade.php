@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>@yield('title') - Proyecto Saleciano Costa Norte</title>
+    <title>@yield('title') - Proyecto Salesiano Costa Norte</title>
     <meta name="description" content="" />
     <link rel="icon" type="image/jpeg" href="{{ asset('assets/img/icono.jpeg')}}" />
     <link rel="apple-touch-icon" href="{{ asset('assets/img/icono.jpeg')}}" />
@@ -23,6 +23,33 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
     <script src="{{ asset('assets/vendor/js/helpers.js')}}"></script>
     <script src="{{ asset('assets/js/config.js')}}"></script>
+    <style>
+        .app-brand-text.demo {
+            font-size: 1.1rem !important;
+            text-transform: none !important;
+            font-weight: 700 !important;
+        }
+
+        h4,
+        .h4 {
+            font-size: clamp(1rem, 2.5vw, 1.25rem) !important;
+        }
+
+        h5,
+        .h5 {
+            font-size: clamp(0.9rem, 2vw, 1.1rem) !important;
+        }
+
+        .card-header h4 {
+            font-weight: 600 !important;
+        }
+
+        @media (max-width: 768px) {
+            .app-brand-text.demo {
+                font-size: 0.95rem !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -34,11 +61,11 @@
                 <div class="app-brand demo">
                     <a href="{{ route('home') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
-                            <img src="{{ asset('assets/img/icono.jpeg') }}" alt="Proyecto Saleciano"
+                            <img src="{{ asset('assets/img/icono.jpeg') }}" alt="Proyecto Salesiano"
                                 style="width: 32px; height: 32px; margin-right: 8px;" />
                         </span>
                         <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color: #000000;">Proyecto
-                            Saleciano</span>
+                            Salesiano</span>
                     </a>
                     <a href="javascript:void(0);"
                         class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -108,15 +135,7 @@
                             </li>
                         @endif
 
-                        <!-- Educador -->
-                        @if(auth()->user()->hasPermission('educador.view'))
-                            <li class="menu-item {{ request()->routeIs('admin.educador.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.educador.index') }}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-book-open" style="color: #dc3545;"></i>
-                                    <div data-i18n="Educador" style="color: #000000;">Educador</div>
-                                </a>
-                            </li>
-                        @endif
+
                     @endauth
                 </ul>
             </aside>
@@ -227,7 +246,7 @@
                         <div
                             class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                             <div class="mb-2 mb-md-0" style="color: #000000;">
-                                © {{ date('Y') }}, Proyecto Saleciano Costa Norte
+                                © {{ date('Y') }}, Proyecto Salesiano Costa Norte
                             </div>
                         </div>
                     </footer>
@@ -250,6 +269,7 @@
     <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
     <script src="{{ asset('assets/vendor/js/menu.js')}}"></script>
     <script src="{{ asset('assets/js/main.js')}}"></script>
+    @stack('scripts')
 </body>
 
 </html>

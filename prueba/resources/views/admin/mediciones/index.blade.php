@@ -61,6 +61,10 @@
                                                 {{ $medicion->fecha_medicion->format('d/m/Y') }}</td>
                                             <td style="color: #000000; border: 1px solid #808080;">
                                                 <div class="btn-group" role="group">
+                                                    <a href="{{ route('admin.mediciones.historial', $medicion->destinatario_id) }}" class="btn btn-sm"
+                                                        style="background-color: #808080; color: #ffffff; border: 1px solid #808080;" title="Historial">
+                                                        <i class="bx bx-history" style="color: #ffffff;"></i>
+                                                    </a>
                                                     <a href="{{ route('admin.mediciones.show', $medicion) }}" class="btn btn-sm"
                                                         style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
                                                         <i class="bx bx-show" style="color: #ffffff;"></i>

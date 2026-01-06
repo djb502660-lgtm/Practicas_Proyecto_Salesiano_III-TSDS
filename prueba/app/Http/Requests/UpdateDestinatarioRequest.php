@@ -60,7 +60,6 @@ class UpdateDestinatarioRequest extends FormRequest
             'estudiando_actualmente' => ['nullable', 'boolean'],
             'tiene_seguro_salud' => ['nullable', 'boolean'],
             'tipo_seguro_salud' => ['nullable', 'string', 'max:255'],
-            'eps' => ['nullable', 'string', 'max:255'],
             'condiciones_medicas' => ['nullable', 'string'],
             'medicamentos_permanentes' => ['nullable', 'string'],
             'alergias' => ['nullable', 'string'],

@@ -28,9 +28,11 @@ Route::middleware(['auth'])->group(function (): void {
         Route::resource('roles', RoleController::class);
         Route::resource('permissions', PermissionController::class);
         Route::resource('destinatarios', DestinatarioController::class);
+        Route::get('mediciones/historial/{destinatario}', [MedicionController::class, 'historial'])->name('mediciones.historial');
         Route::resource('mediciones', MedicionController::class)->parameters([
             'mediciones' => 'medicion',
         ]);
+        Route::resource('seguimientos', \App\Http\Controllers\SeguimientoMedicionController::class)->only(['index', 'destroy']);
         Route::resource('psicologia', \App\Http\Controllers\PsicologiaController::class)->parameters([
             'psicologia' => 'psicologia',
         ]);

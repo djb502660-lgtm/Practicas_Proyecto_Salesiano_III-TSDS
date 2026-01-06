@@ -24,15 +24,41 @@ class MedicionController extends Controller
     }
 
     /**
+     * Display historical measurements for a specific destinatario.
+     */
+    public function historial(Destinatario $destinatario): View
+    {
+        $mediciones = Medicion::where('destinatario_id', $destinatario->id)
+            ->with(['user'])
+            ->latest('fecha_medicion')
+            ->paginate(15);
+
+        // Datos para la gráfica (en orden cronológico)
+        $graficaData = Medicion::where('destinatario_id', $destinatario->id)
+            ->orderBy('fecha_medicion', 'asc')
+            ->get();
+
+        $chartData = [
+            'dates' => $graficaData->pluck('fecha_medicion')->map(fn($d) => $d->format('d/m/Y')),
+            'peso' => $graficaData->pluck('peso'),
+            'imc' => $graficaData->pluck('imc'),
+        ];
+
+        return view('admin.mediciones.historial', compact('mediciones', 'destinatario', 'chartData'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create(\Illuminate\Http\Request $request): View
     {
         $destinatarios = Destinatario::where('estado', 'activo')
             ->orderBy('primer_nombre')
             ->get();
 
-        return view('admin.mediciones.create', compact('destinatarios'));
+        $selected_destinatario_id = $request->get('destinatario_id');
+
+        return view('admin.mediciones.create', compact('destinatarios', 'selected_destinatario_id'));
     }
 
     /**
@@ -54,8 +80,17 @@ class MedicionController extends Controller
             'user_id' => auth()->id(),
         ]);
 
+        // Crear automáticamente el registro de seguimiento
+        \App\Models\SeguimientoMedicion::create([
+            'medicion_id' => $medicion->id,
+            'destinatario_id' => $medicion->destinatario_id,
+            'fecha_seguimiento' => $medicion->fecha_medicion,
+            'fecha_proximo_seguimiento' => \Carbon\Carbon::parse($medicion->fecha_medicion)->addMonths(6),
+            'estado' => 'realizado', // Se marca como realizado porque la medición acaba de ocurrir
+        ]);
+
         return redirect()->route('admin.mediciones.index')
-            ->with('success', 'Medición registrada exitosamente.');
+            ->with('success', 'Medición y seguimiento registrados exitosamente.');
     }
 
     /**
