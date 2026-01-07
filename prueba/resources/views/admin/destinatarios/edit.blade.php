@@ -169,7 +169,7 @@
                                 <div class="card-header"
                                     style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
                                     <h5 style="color: #000000; margin: 0;"><i class="bx bx-phone"
-                                            style="color: #dc3545;"></i> Datos de Contacto</h5>
+                                            style="color: #dc3545;"></i> Datos de Contacto del Familiar</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -298,7 +298,7 @@
                                 <div class="card-header"
                                     style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
                                     <h5 style="color: #000000; margin: 0;"><i class="bx bx-briefcase"
-                                            style="color: #dc3545;"></i> Datos Laborales</h5>
+                                            style="color: #dc3545;"></i> Datos Laborales del Familiar</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -381,7 +381,7 @@
                                 <div class="card-header"
                                     style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
                                     <h5 style="color: #000000; margin: 0;"><i class="bx bx-book"
-                                            style="color: #dc3545;"></i> Datos Educativos</h5>
+                                            style="color: #dc3545;"></i> Datos Educativos del Niño</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
@@ -399,8 +399,6 @@
                                                 </option>
                                                 <option value="universitario" {{ old('nivel_educativo', $destinatario->nivel_educativo) == 'universitario' ? 'selected' : '' }}>
                                                     Universitario</option>
-                                                <option value="postgrado" {{ old('nivel_educativo', $destinatario->nivel_educativo) == 'postgrado' ? 'selected' : '' }}>
-                                                    Postgrado</option>
                                                 <option value="ninguno" {{ old('nivel_educativo', $destinatario->nivel_educativo) == 'ninguno' ? 'selected' : '' }}>Ninguno
                                                 </option>
                                             </select>
@@ -452,7 +450,7 @@
                                 <div class="card-header"
                                     style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
                                     <h5 style="color: #000000; margin: 0;"><i class="bx bx-plus-medical"
-                                            style="color: #dc3545;"></i> Datos de Salud</h5>
+                                            style="color: #dc3545;"></i> Datos de Salud del Niño</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row mb-3">
@@ -472,10 +470,14 @@
                                         <div class="col-md-6 mb-3">
                                             <label for="tipo_seguro_salud" class="form-label" style="color: #000000;">Tipo
                                                 de Seguro de Salud</label>
-                                            <input type="text" class="form-control" id="tipo_seguro_salud"
-                                                name="tipo_seguro_salud"
-                                                value="{{ old('tipo_seguro_salud', $destinatario->tipo_seguro_salud) }}"
+                                            <select class="form-control" id="tipo_seguro_salud" name="tipo_seguro_salud"
                                                 style="border: 1px solid #808080; color: #000000;">
+                                                <option value="">Seleccione...</option>
+                                                <option value="Seguro del IESS" {{ old('tipo_seguro_salud', $destinatario->tipo_seguro_salud) == 'Seguro del IESS' ? 'selected' : '' }}>Seguro del IESS</option>
+                                                <option value="Seguro Campesino" {{ old('tipo_seguro_salud', $destinatario->tipo_seguro_salud) == 'Seguro Campesino' ? 'selected' : '' }}>Seguro Campesino</option>
+                                                <option value="Seguro Voluntario" {{ old('tipo_seguro_salud', $destinatario->tipo_seguro_salud) == 'Seguro Voluntario' ? 'selected' : '' }}>Seguro Voluntario</option>
+                                                <option value="Otros" {{ old('tipo_seguro_salud', $destinatario->tipo_seguro_salud) == 'Otros' ? 'selected' : '' }}>Otros</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row">

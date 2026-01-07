@@ -71,7 +71,7 @@
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
                                 <h5 style="color: #000000; margin: 0;"><i class="ri-phone-line" style="color: #dc3545;"></i>
-                                    Datos de Contacto</h5>
+                                    Datos de Contacto del Familiar</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -146,7 +146,7 @@
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
                                 <h5 style="color: #000000; margin: 0;"><i class="ri-briefcase-line"
-                                        style="color: #dc3545;"></i> Datos Laborales</h5>
+                                        style="color: #dc3545;"></i> Datos Laborales del Familiar</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -189,7 +189,7 @@
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
                                 <h5 style="color: #000000; margin: 0;"><i class="ri-book-open-line" style="color: #dc3545;"></i>
-                                    Datos Educativos</h5>
+                                    Datos Educativos del Niño</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -225,7 +225,7 @@
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
                                 <h5 style="color: #000000; margin: 0;"><i class="ri-heart-pulse-line"
-                                        style="color: #dc3545;"></i> Datos de Salud</h5>
+                                        style="color: #dc3545;"></i> Datos de Salud del Niño</h5>
                             </div>
                             <div class="card-body">
                                 <div class="row">
