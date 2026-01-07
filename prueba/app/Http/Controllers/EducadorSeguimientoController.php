@@ -27,9 +27,15 @@ class EducadorSeguimientoController extends Controller implements HasMiddleware
 
     public function index(): View
     {
-        $registros = EducadorSeguimiento::with(['destinatario', 'user'])
-            ->latest('fecha_registro')
-            ->paginate(15);
+        $query = EducadorSeguimiento::with(['destinatario', 'user'])
+            ->latest('fecha_registro');
+
+        // Si no es director ni coordinador, solo ve sus propios registros
+        if (!auth()->user()->hasAnyRole(['director', 'coordinador'])) {
+            $query->where('user_id', auth()->id());
+        }
+
+        $registros = $query->paginate(15);
 
         return view('admin.educador.index', compact('registros'));
     }

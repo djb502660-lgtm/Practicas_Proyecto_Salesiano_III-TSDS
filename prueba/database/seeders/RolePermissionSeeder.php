@@ -188,6 +188,26 @@ class RolePermissionSeeder extends Seeder
         ]);
         $this->command->info("  ✓ Rol actualizado: {$educadorRole->name}");
 
+        // Rol Psicología - Gestión de fichas psicológicas
+        $psicologiaRole = Role::updateOrCreate(
+            ['slug' => 'psicologia'],
+            [
+                'name' => 'Psicología',
+                'description' => 'Rol para el equipo de psicología, encargado de seguimientos y alertas.',
+            ]
+        );
+        $psicologiaRole->permissions()->sync([
+            $permissions['destinatarios.view']->id,
+            $permissions['mediciones.view']->id,
+            $permissions['psicologia.view']->id,
+            $permissions['psicologia.create']->id,
+            $permissions['psicologia.edit']->id,
+            $permissions['psicologia-reportes.view']->id,
+            $permissions['psicologia-alertas.view']->id,
+            $permissions['dashboard.access']->id,
+        ]);
+        $this->command->info("  ✓ Rol creado: {$psicologiaRole->name}");
+
         // Asegurarse de que el rol 'docente' (si existe) pase sus usuarios a 'educador'
         $docenteRole = Role::where('slug', 'docente')->first();
         if ($docenteRole) {
@@ -204,6 +224,7 @@ class RolePermissionSeeder extends Seeder
             'director' => $directorRole,
             'coordinador' => $coordinadorRole,
             'educador' => $educadorRole,
+            'psicologia' => $psicologiaRole,
         ];
     }
 
@@ -249,5 +270,17 @@ class RolePermissionSeeder extends Seeder
         );
         $educadorUser->syncRoles([$roles['educador']->id]);
         $this->command->info("  ✓ Usuario creado: {$educadorUser->name} ({$educadorUser->email}) - Contraseña: password");
+
+        // Usuario Psicología
+        $psicologiaUser = User::updateOrCreate(
+            ['email' => 'psicologia@example.com'],
+            [
+                'name' => 'Psicología',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+            ]
+        );
+        $psicologiaUser->syncRoles([$roles['psicologia']->id]);
+        $this->command->info("  ✓ Usuario creado: {$psicologiaUser->name} ({$psicologiaUser->email}) - Contraseña: password");
     }
 }

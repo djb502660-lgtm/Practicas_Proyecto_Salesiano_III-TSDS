@@ -182,6 +182,17 @@
                             </li>
                         @endif
 
+                        <!-- Seguimiento Educador -->
+                        @if(auth()->user()->hasPermission('educador.view'))
+                            <li class="menu-item {{ request()->routeIs('admin.educador.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.educador.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons ri-service-line"
+                                        style="color: #dc3545; font-size: 1.25rem;"></i>
+                                    <div data-i18n="Seguimiento Educador" style="color: #000000;">Seguimiento Educador</div>
+                                </a>
+                            </li>
+                        @endif
+
 
                     @endauth
                 </ul>
