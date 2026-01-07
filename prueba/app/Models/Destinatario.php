@@ -62,6 +62,7 @@ class Destinatario extends Model
         'estado',
         'fecha_registro',
         'user_id',
+        'institucion_educativa_id',
     ];
 
     /**
@@ -123,6 +124,32 @@ class Destinatario extends Model
     public function ultimaMedicion(): ?Medicion
     {
         return $this->mediciones()->latest('fecha_medicion')->first();
+    }
+
+    /**
+     * Get the educational institution of the destinatario.
+     */
+    public function institucionEducativa(): BelongsTo
+    {
+        return $this->belongsTo(InstitucionEducativa::class);
+    }
+
+    /**
+     * Scope a query to search destinatarios.
+     */
+    public function scopeSearch($query, $search)
+    {
+        return $query->when($search, function ($query, $search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('primer_nombre', 'like', "%{$search}%")
+                    ->orWhere('segundo_nombre', 'like', "%{$search}%")
+                    ->orWhere('primer_apellido', 'like', "%{$search}%")
+                    ->orWhere('segundo_apellido', 'like', "%{$search}%")
+                    ->orWhere('numero_documento', 'like', "%{$search}%")
+                    ->orWhere('ciudad', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            });
+        });
     }
 }
 

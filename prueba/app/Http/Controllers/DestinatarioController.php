@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InstitucionEducativa;
+
 use App\Http\Requests\StoreDestinatarioRequest;
 use App\Http\Requests\UpdateDestinatarioRequest;
 use App\Models\Destinatario;
@@ -15,11 +17,15 @@ class DestinatarioController extends Controller
      */
     public function index(): View
     {
-        $destinatarios = Destinatario::with('user')
-            ->latest()
-            ->paginate(15);
+        $search = request('search');
 
-        return view('admin.destinatarios.index', compact('destinatarios'));
+        $destinatarios = Destinatario::with('user')
+            ->search($search)
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
+
+        return view('admin.destinatarios.index', compact('destinatarios', 'search'));
     }
 
     /**
@@ -27,7 +33,8 @@ class DestinatarioController extends Controller
      */
     public function create(): View
     {
-        return view('admin.destinatarios.create');
+        $instituciones = InstitucionEducativa::orderBy('nombre')->get();
+        return view('admin.destinatarios.create', compact('instituciones'));
     }
 
     /**
@@ -65,7 +72,8 @@ class DestinatarioController extends Controller
      */
     public function edit(Destinatario $destinatario): View
     {
-        return view('admin.destinatarios.edit', compact('destinatario'));
+        $instituciones = InstitucionEducativa::orderBy('nombre')->get();
+        return view('admin.destinatarios.edit', compact('destinatario', 'instituciones'));
     }
 
     /**

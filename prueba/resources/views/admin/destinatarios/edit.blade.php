@@ -406,12 +406,21 @@
                                             </select>
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <label for="institucion_educativa" class="form-label"
+                                            <label for="institucion_educativa_id" class="form-label"
                                                 style="color: #000000;">Institución Educativa</label>
-                                            <input type="text" class="form-control" id="institucion_educativa"
-                                                name="institucion_educativa"
-                                                value="{{ old('institucion_educativa', $destinatario->institucion_educativa) }}"
+                                            <select class="form-control @error('institucion_educativa_id') is-invalid @enderror"
+                                                id="institucion_educativa_id" name="institucion_educativa_id"
                                                 style="border: 1px solid #808080; color: #000000;">
+                                                <option value="">Seleccione...</option>
+                                                @foreach($instituciones as $institucion)
+                                                    <option value="{{ $institucion->id }}" {{ old('institucion_educativa_id', $destinatario->institucion_educativa_id) == $institucion->id ? 'selected' : '' }}>
+                                                        {{ $institucion->nombre }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('institucion_educativa_id')
+                                                <div class="invalid-feedback" style="color: #dc3545;">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label for="titulo_obtenido" class="form-label" style="color: #000000;">Título

@@ -12,7 +12,7 @@
                             <h4 class="mb-0" style="color: #000000;">Lista de Destinatarios</h4>
                             <a href="{{ route('admin.destinatarios.create') }}" class="btn"
                                 style="background-color: #dc3545; color: #ffffff; border: none;">
-                                <i class="bx bx-plus" style="color: #ffffff;"></i> Nuevo Destinatario
+                                <i class="ri-add-line" style="color: #ffffff;"></i> Nuevo Destinatario
                             </a>
                         </div>
                     </div>
@@ -24,6 +24,39 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                             </div>
                         @endif
+
+                        <!-- Buscador -->
+                        <div class="row mb-4">
+                            <div class="col-md-8 mx-auto">
+                                <form action="{{ route('admin.destinatarios.index') }}" method="GET" class="d-flex gap-2">
+                                    <div class="input-group input-group-merge border rounded-pill overflow-hidden shadow-sm"
+                                        style="transition: all 0.3s ease;">
+                                        <span class="input-group-text bg-white border-0 ps-3">
+                                            <i class="ri-search-line text-muted"></i>
+                                        </span>
+                                        <input type="text" name="search" class="form-control border-0 ps-1"
+                                            placeholder="Buscar por nombre, documento o ciudad..." value="{{ $search }}"
+                                            style="box-shadow: none !important;">
+                                        @if($search)
+                                            <a href="{{ route('admin.destinatarios.index') }}"
+                                                class="btn bg-white border-0 text-muted px-3" title="Limpiar búsqueda">
+                                                <i class="ri-close-circle-line"></i>
+                                            </a>
+                                        @endif
+                                        <button type="submit" class="btn btn-primary px-4 rounded-pill m-1"
+                                            style="background-color: #dc3545; border: none;">
+                                            Buscar
+                                        </button>
+                                    </div>
+                                </form>
+                                @if($search)
+                                    <div class="text-center mt-2">
+                                        <small class="text-muted">Mostrando resultados para:
+                                            <strong>"{{ $search }}"</strong></small>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="table-responsive">
                             <table class="table table-bordered" style="border: 1px solid #808080; color: #000000;">
@@ -42,9 +75,11 @@
                                         <tr>
                                             <td style="color: #000000; border: 1px solid #808080;">{{ $destinatario->id }}</td>
                                             <td style="color: #000000; border: 1px solid #808080;">
-                                                {{ $destinatario->nombre_completo }}</td>
+                                                {{ $destinatario->nombre_completo }}
+                                            </td>
                                             <td style="color: #000000; border: 1px solid #808080;">
-                                                {{ $destinatario->numero_documento }}</td>
+                                                {{ $destinatario->numero_documento }}
+                                            </td>
                                             <td style="color: #000000; border: 1px solid #808080;">{{ $destinatario->ciudad }}
                                             </td>
                                             <td style="color: #000000; border: 1px solid #808080;">
@@ -58,12 +93,12 @@
                                                     <a href="{{ route('admin.destinatarios.show', $destinatario) }}"
                                                         class="btn btn-sm"
                                                         style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
-                                                        <i class="bx bx-show" style="color: #ffffff;"></i>
+                                                        <i class="ri-eye-line" style="color: #ffffff;"></i>
                                                     </a>
                                                     <a href="{{ route('admin.destinatarios.edit', $destinatario) }}"
                                                         class="btn btn-sm"
                                                         style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
-                                                        <i class="bx bx-edit" style="color: #ffffff;"></i>
+                                                        <i class="ri-edit-line" style="color: #ffffff;"></i>
                                                     </a>
                                                     <form action="{{ route('admin.destinatarios.destroy', $destinatario) }}"
                                                         method="POST" class="d-inline"
@@ -72,7 +107,7 @@
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm"
                                                             style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
-                                                            <i class="bx bx-trash" style="color: #ffffff;"></i>
+                                                            <i class="ri-delete-bin-line" style="color: #ffffff;"></i>
                                                         </button>
                                                     </form>
                                                 </div>

@@ -199,7 +199,7 @@
             <div class="bottom-nav">
                 <div class="nav-item-custom">
                     <i class='bx bx-grid-alt'></i>
-                    <span>Dashboard</span>
+                    <span>Panel</span>
                 </div>
                 <div class="nav-item-custom">
                     <i class='bx bx-restaurant'></i>

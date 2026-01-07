@@ -162,8 +162,17 @@ class MedicionSeeder extends Seeder
                 'user_id' => $adminUser?->id,
             ]);
 
+            // Crear automáticamente el registro de seguimiento
+            \App\Models\SeguimientoMedicion::create([
+                'medicion_id' => $medicion->id,
+                'destinatario_id' => $medicion->destinatario_id,
+                'fecha_seguimiento' => $medicion->fecha_medicion,
+                'fecha_proximo_seguimiento' => \Carbon\Carbon::parse($medicion->fecha_medicion)->addMonths(6),
+                'estado' => 'realizado',
+            ]);
+
             $destinatario = $medicion->destinatario;
-            $this->command->info("  ✓ Medición creada: {$destinatario->nombre_completo} - IMC: {$imc} ({$medicion->clasificacion_label})");
+            $this->command->info("  ✓ Medición y seguimiento creados: {$destinatario->nombre_completo} - IMC: {$imc} ({$medicion->clasificacion_label})");
         }
 
         $this->command->info('¡Seeder de mediciones completado exitosamente!');

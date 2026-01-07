@@ -16,6 +16,7 @@
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css')}}"
         class="template-customizer-theme-css" />
@@ -49,6 +50,47 @@
                 font-size: 0.95rem !important;
             }
         }
+
+        /* Estilos Globales para Botones Premium */
+        .btn {
+            border-radius: 8px !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .btn-primary {
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+        }
+
+        .btn-primary:hover {
+            background-color: #c82333 !important;
+            border-color: #bd2130 !important;
+        }
+
+        .card {
+            border-radius: 12px !important;
+            transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .menu-item.active>.menu-link {
+            background: rgba(220, 53, 69, 0.1) !important;
+            color: #dc3545 !important;
+        }
+
+        .menu-item.active>.menu-link i {
+            color: #dc3545 !important;
+        }
     </style>
 </head>
 
@@ -79,7 +121,8 @@
                     <!-- Dashboard -->
                     <li class="menu-item {{ request()->routeIs('home') ? 'active' : '' }}">
                         <a href="{{ route('home') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle" style="color: #dc3545;"></i>
+                            <i class="menu-icon tf-icons ri-dashboard-3-line"
+                                style="color: #dc3545; font-size: 1.25rem;"></i>
                             <div data-i18n="Inicio" style="color: #000000;">Inicio</div>
                         </a>
                     </li>
@@ -89,7 +132,8 @@
                         @if(auth()->user()->hasPermission('users.view'))
                             <li class="menu-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.users.index') }}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-user" style="color: #dc3545;"></i>
+                                    <i class="menu-icon tf-icons ri-user-settings-line"
+                                        style="color: #dc3545; font-size: 1.25rem;"></i>
                                     <div data-i18n="Usuarios" style="color: #000000;">Usuarios</div>
                                 </a>
                             </li>
@@ -99,7 +143,8 @@
                         @if(auth()->user()->hasPermission('roles.view'))
                             <li class="menu-item {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.roles.index') }}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-shield" style="color: #dc3545;"></i>
+                                    <i class="menu-icon tf-icons ri-shield-check-line"
+                                        style="color: #dc3545; font-size: 1.25rem;"></i>
                                     <div data-i18n="Roles" style="color: #000000;">Roles</div>
                                 </a>
                             </li>
@@ -109,7 +154,7 @@
                         @if(auth()->user()->hasPermission('destinatarios.view'))
                             <li class="menu-item {{ request()->routeIs('admin.destinatarios.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.destinatarios.index') }}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-group" style="color: #dc3545;"></i>
+                                    <i class="menu-icon tf-icons ri-team-line" style="color: #dc3545; font-size: 1.25rem;"></i>
                                     <div data-i18n="Destinatarios" style="color: #000000;">Destinatarios</div>
                                 </a>
                             </li>
@@ -119,7 +164,8 @@
                         @if(auth()->user()->hasPermission('mediciones.view'))
                             <li class="menu-item {{ request()->routeIs('admin.mediciones.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.mediciones.index') }}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-line-chart" style="color: #dc3545;"></i>
+                                    <i class="menu-icon tf-icons ri-bar-chart-2-line"
+                                        style="color: #dc3545; font-size: 1.25rem;"></i>
                                     <div data-i18n="Mediciones" style="color: #000000;">Mediciones</div>
                                 </a>
                             </li>
@@ -129,7 +175,8 @@
                         @if(auth()->user()->hasPermission('psicologia.view'))
                             <li class="menu-item {{ request()->routeIs('admin.psicologia.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.psicologia.index') }}" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-brain" style="color: #dc3545;"></i>
+                                    <i class="menu-icon tf-icons ri-mental-health-line"
+                                        style="color: #dc3545; font-size: 1.25rem;"></i>
                                     <div data-i18n="Psicología" style="color: #000000;">Psicología</div>
                                 </a>
                             </li>

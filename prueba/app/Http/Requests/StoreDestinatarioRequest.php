@@ -52,7 +52,7 @@ class StoreDestinatarioRequest extends FormRequest
             'tipo_empleo' => ['nullable', 'in:empleado,independiente,desempleado,estudiante,jubilado,otro'],
             'descripcion_laboral' => ['nullable', 'string'],
             'nivel_educativo' => ['nullable', 'in:primaria,secundaria,tecnico,universitario,postgrado,ninguno'],
-            'institucion_educativa' => ['nullable', 'string', 'max:255'],
+            'institucion_educativa_id' => ['nullable', 'exists:instituciones_educativas,id'],
             'titulo_obtenido' => ['nullable', 'string', 'max:255'],
             'estudiando_actualmente' => ['nullable', 'boolean'],
             'tiene_seguro_salud' => ['nullable', 'boolean'],

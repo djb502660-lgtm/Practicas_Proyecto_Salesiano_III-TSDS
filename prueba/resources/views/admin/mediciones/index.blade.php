@@ -12,7 +12,7 @@
                             <h4 class="mb-0" style="color: #000000;">Registro de Mediciones</h4>
                             <a href="{{ route('admin.mediciones.create') }}" class="btn"
                                 style="background-color: #dc3545; color: #ffffff; border: none;">
-                                <i class="bx bx-plus" style="color: #ffffff;"></i> Nueva Medición
+                                <i class="ri-add-line" style="color: #ffffff;"></i> Nueva Medición
                             </a>
                         </div>
                     </div>
@@ -63,15 +63,15 @@
                                                 <div class="btn-group" role="group">
                                                     <a href="{{ route('admin.mediciones.historial', $medicion->destinatario_id) }}" class="btn btn-sm"
                                                         style="background-color: #808080; color: #ffffff; border: 1px solid #808080;" title="Historial">
-                                                        <i class="bx bx-history" style="color: #ffffff;"></i>
+                                                        <i class="ri-history-line" style="color: #ffffff;"></i>
                                                     </a>
                                                     <a href="{{ route('admin.mediciones.show', $medicion) }}" class="btn btn-sm"
                                                         style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
-                                                        <i class="bx bx-show" style="color: #ffffff;"></i>
+                                                        <i class="ri-eye-line" style="color: #ffffff;"></i>
                                                     </a>
                                                     <a href="{{ route('admin.mediciones.edit', $medicion) }}" class="btn btn-sm"
                                                         style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
-                                                        <i class="bx bx-edit" style="color: #ffffff;"></i>
+                                                        <i class="ri-edit-line" style="color: #ffffff;"></i>
                                                     </a>
                                                     <form action="{{ route('admin.mediciones.destroy', $medicion) }}"
                                                         method="POST" class="d-inline"
@@ -80,7 +80,7 @@
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm"
                                                             style="background-color: #dc3545; color: #ffffff; border: 1px solid #808080;">
-                                                            <i class="bx bx-trash" style="color: #ffffff;"></i>
+                                                            <i class="ri-delete-bin-line" style="color: #ffffff;"></i>
                                                         </button>
                                                     </form>
                                                 </div>

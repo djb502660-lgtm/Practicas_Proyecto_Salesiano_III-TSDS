@@ -14,7 +14,7 @@
                             <div>
                                 <a href="{{ route('admin.destinatarios.edit', $destinatario) }}" class="btn"
                                     style="background-color: #dc3545; color: #ffffff; border: none;">
-                                    <i class="bx bx-edit" style="color: #ffffff;"></i> Editar
+                                    <i class="ri-edit-line" style="color: #ffffff;"></i> Editar
                                 </a>
                                 <a href="{{ route('admin.destinatarios.index') }}" class="btn"
                                     style="background-color: #808080; color: #ffffff; border: 1px solid #808080;">
@@ -27,7 +27,7 @@
                         <!-- Datos Personales -->
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
-                                <h5 style="color: #000000; margin: 0;"><i class="bx bx-user" style="color: #dc3545;"></i>
+                                <h5 style="color: #000000; margin: 0;"><i class="ri-user-line" style="color: #dc3545;"></i>
                                     Datos Personales</h5>
                             </div>
                             <div class="card-body">
@@ -70,7 +70,7 @@
                         <!-- Datos de Contacto -->
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
-                                <h5 style="color: #000000; margin: 0;"><i class="bx bx-phone" style="color: #dc3545;"></i>
+                                <h5 style="color: #000000; margin: 0;"><i class="ri-phone-line" style="color: #dc3545;"></i>
                                     Datos de Contacto</h5>
                             </div>
                             <div class="card-body">
@@ -113,7 +113,7 @@
                         <!-- Datos Familiares -->
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
-                                <h5 style="color: #000000; margin: 0;"><i class="bx bx-group" style="color: #dc3545;"></i>
+                                <h5 style="color: #000000; margin: 0;"><i class="ri-team-line" style="color: #dc3545;"></i>
                                     Datos Familiares</h5>
                             </div>
                             <div class="card-body">
@@ -145,7 +145,7 @@
                         <!-- Datos Laborales -->
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
-                                <h5 style="color: #000000; margin: 0;"><i class="bx bx-briefcase"
+                                <h5 style="color: #000000; margin: 0;"><i class="ri-briefcase-line"
                                         style="color: #dc3545;"></i> Datos Laborales</h5>
                             </div>
                             <div class="card-body">
@@ -188,7 +188,7 @@
                         <!-- Datos Educativos -->
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
-                                <h5 style="color: #000000; margin: 0;"><i class="bx bx-book" style="color: #dc3545;"></i>
+                                <h5 style="color: #000000; margin: 0;"><i class="ri-book-open-line" style="color: #dc3545;"></i>
                                     Datos Educativos</h5>
                             </div>
                             <div class="card-body">
@@ -202,12 +202,12 @@
                                     <div class="col-md-3" style="color: #000000;">
                                         {{ $destinatario->estudiando_actualmente ? 'Sí' : 'No' }}</div>
                                 </div>
-                                @if($destinatario->institucion_educativa)
+                                @if($destinatario->institucionEducativa)
                                     <hr style="border-color: #808080;">
                                     <div class="row">
                                         <div class="col-md-3"><strong style="color: #000000;">Institución Educativa:</strong>
                                         </div>
-                                        <div class="col-md-9" style="color: #000000;">{{ $destinatario->institucion_educativa }}
+                                        <div class="col-md-9" style="color: #000000;">{{ $destinatario->institucionEducativa->nombre }}
                                         </div>
                                     </div>
                                 @endif
@@ -224,7 +224,7 @@
                         <!-- Datos de Salud -->
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
-                                <h5 style="color: #000000; margin: 0;"><i class="bx bx-plus-medical"
+                                <h5 style="color: #000000; margin: 0;"><i class="ri-heart-pulse-line"
                                         style="color: #dc3545;"></i> Datos de Salud</h5>
                             </div>
                             <div class="card-body">
@@ -270,7 +270,7 @@
                         <!-- Estado y Observaciones -->
                         <div class="card mb-3" style="background-color: #f8f9fa; border: 1px solid #808080;">
                             <div class="card-header" style="background-color: #f8f9fa; border-bottom: 1px solid #808080;">
-                                <h5 style="color: #000000; margin: 0;"><i class="bx bx-info-circle"
+                                <h5 style="color: #000000; margin: 0;"><i class="ri-information-line"
                                         style="color: #dc3545;"></i> Estado y Observaciones</h5>
                             </div>
                             <div class="card-body">

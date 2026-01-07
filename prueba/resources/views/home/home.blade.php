@@ -9,7 +9,7 @@
                 <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
                     <div class="card-header" style="background-color: #ffffff; border-bottom: 1px solid #808080;">
                         <h4 class="mb-0" style="color: #000000;">
-                            <i class="bx bx-home" style="color: #dc3545;"></i> Panel de Control
+                            <i class="ri-dashboard-fill" style="color: #dc3545;"></i> Panel de Control
                         </h4>
                     </div>
                     <div class="card-body" style="background-color: #ffffff;">
@@ -17,13 +17,16 @@
                             <div class="col-md-4 mb-4">
                                 <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
                                     <div class="card-body text-center">
-                                        <i class="bx bx-user" style="font-size: 3rem; color: #dc3545;"></i>
+                                        <div class="mb-3">
+                                            <i class="ri-user-settings-fill"
+                                                style="font-size: 3rem; color: #dc3545; background: rgba(220, 53, 69, 0.1); padding: 20px; border-radius: 16px;"></i>
+                                        </div>
                                         <h5 class="mt-3" style="color: #000000;">Usuarios</h5>
                                         <p class="h3 font-weight-bold" style="color: #dc3545;">{{ $stats['users'] }}</p>
                                         <p class="text-muted" style="color: #000000;">Gestiona los usuarios del sistema</p>
                                         <a href="{{ route('admin.users.index') }}" class="btn"
                                             style="background-color: #dc3545; color: #ffffff; border: none;">
-                                            <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Usuarios
+                                            <i class="ri-arrow-right-line" style="color: #ffffff;"></i> Ver Usuarios
                                         </a>
                                     </div>
                                 </div>
@@ -31,7 +34,10 @@
                             <div class="col-md-4 mb-4">
                                 <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
                                     <div class="card-body text-center">
-                                        <i class="bx bx-group" style="font-size: 3rem; color: #dc3545;"></i>
+                                        <div class="mb-3">
+                                            <i class="ri-team-fill"
+                                                style="font-size: 3rem; color: #dc3545; background: rgba(220, 53, 69, 0.1); padding: 20px; border-radius: 16px;"></i>
+                                        </div>
                                         <h5 class="mt-3" style="color: #000000;">Destinatarios</h5>
                                         <p class="h3 font-weight-bold" style="color: #dc3545;">{{ $stats['destinatarios'] }}
                                         </p>
@@ -39,7 +45,7 @@
                                         </p>
                                         <a href="{{ route('admin.destinatarios.index') }}" class="btn"
                                             style="background-color: #dc3545; color: #ffffff; border: none;">
-                                            <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Destinatarios
+                                            <i class="ri-arrow-right-line" style="color: #ffffff;"></i> Ver Destinatarios
                                         </a>
                                     </div>
                                 </div>
@@ -47,14 +53,17 @@
                             <div class="col-md-4 mb-4">
                                 <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
                                     <div class="card-body text-center">
-                                        <i class="bx bx-line-chart" style="font-size: 3rem; color: #dc3545;"></i>
+                                        <div class="mb-3">
+                                            <i class="ri-pulse-fill"
+                                                style="font-size: 3rem; color: #dc3545; background: rgba(220, 53, 69, 0.1); padding: 20px; border-radius: 16px;"></i>
+                                        </div>
                                         <h5 class="mt-3" style="color: #000000;">Mediciones</h5>
                                         <p class="h3 font-weight-bold" style="color: #dc3545;">{{ $stats['mediciones'] }}
                                         </p>
                                         <p class="text-muted" style="color: #000000;">Registra peso, talla e IMC</p>
                                         <a href="{{ route('admin.mediciones.index') }}" class="btn"
                                             style="background-color: #dc3545; color: #ffffff; border: none;">
-                                            <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Mediciones
+                                            <i class="ri-arrow-right-line" style="color: #ffffff;"></i> Ver Mediciones
                                         </a>
                                     </div>
                                 </div>
@@ -62,14 +71,17 @@
                             <div class="col-md-4 mb-4">
                                 <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
                                     <div class="card-body text-center">
-                                        <i class="bx bx-brain" style="font-size: 3rem; color: #dc3545;"></i>
+                                        <div class="mb-3">
+                                            <i class="ri-mental-health-fill"
+                                                style="font-size: 3rem; color: #dc3545; background: rgba(220, 53, 69, 0.1); padding: 20px; border-radius: 16px;"></i>
+                                        </div>
                                         <h5 class="mt-3" style="color: #000000;">Psicología</h5>
                                         <p class="h3 font-weight-bold" style="color: #dc3545;">{{ $stats['psicologia'] }}
                                         </p>
                                         <p class="text-muted" style="color: #000000;">Seguimiento psicológico</p>
                                         <a href="{{ route('admin.psicologia.index') }}" class="btn"
                                             style="background-color: #dc3545; color: #ffffff; border: none;">
-                                            <i class="bx bx-right-arrow-alt" style="color: #ffffff;"></i> Ver Psicología
+                                            <i class="ri-arrow-right-line" style="color: #ffffff;"></i> Ver Psicología
                                         </a>
                                     </div>
                                 </div>
@@ -78,14 +90,21 @@
                             <div class="col-md-4 mb-4">
                                 <div class="card" style="background-color: #ffffff; border: 1px solid #808080;">
                                     <div class="card-body text-center">
-                                        <i class="bx bx-shield" style="font-size: 3rem; color: #dc3545;"></i>
+                                        <div class="mb-3">
+                                            <i class="ri-shield-keyhole-fill"
+                                                style="font-size: 3rem; color: #dc3545; background: rgba(220, 53, 69, 0.1); padding: 20px; border-radius: 16px;"></i>
+                                        </div>
                                         <h5 class="mt-3" style="color: #000000;">Roles y Permisos</h5>
                                         <p class="text-muted" style="color: #000000;">Seguridad del sistema</p>
                                         <div class="btn-group">
                                             <a href="{{ route('admin.roles.index') }}" class="btn btn-sm"
-                                                style="background-color: #dc3545; color: #ffffff; border: none;">Roles</a>
+                                                style="background-color: #dc3545; color: #ffffff; border: none; padding: 0.5rem 1rem;">
+                                                <i class="ri-shield-user-line me-1"></i> Roles
+                                            </a>
                                             <a href="{{ route('admin.permissions.index') }}" class="btn btn-sm"
-                                                style="background-color: #808080; color: #ffffff; border: none;">Permisos</a>
+                                                style="background-color: #808080; color: #ffffff; border: none; padding: 0.5rem 1rem;">
+                                                <i class="ri-lock-password-line me-1"></i> Permisos
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
