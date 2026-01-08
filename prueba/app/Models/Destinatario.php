@@ -141,10 +141,7 @@ class Destinatario extends Model
     {
         return $query->when($search, function ($query, $search) {
             return $query->where(function ($query) use ($search) {
-                $query->where('primer_nombre', 'like', "%{$search}%")
-                    ->orWhere('segundo_nombre', 'like', "%{$search}%")
-                    ->orWhere('primer_apellido', 'like', "%{$search}%")
-                    ->orWhere('segundo_apellido', 'like', "%{$search}%")
+                $query->whereRaw("CONCAT_WS(' ', primer_nombre, segundo_nombre, primer_apellido, segundo_apellido) LIKE ?", ["%{$search}%"])
                     ->orWhere('numero_documento', 'like', "%{$search}%")
                     ->orWhere('ciudad', 'like', "%{$search}%")
                     ->orWhere('email', 'like', "%{$search}%");

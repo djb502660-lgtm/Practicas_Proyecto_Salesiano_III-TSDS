@@ -8,6 +8,10 @@ class HomeController extends Controller
 {
     public function index()
     {
+        if (auth()->guest()) {
+            return view('landing');
+        }
+
         $stats = [
             'users' => \App\Models\User::count(),
             'destinatarios' => \App\Models\Destinatario::count(),

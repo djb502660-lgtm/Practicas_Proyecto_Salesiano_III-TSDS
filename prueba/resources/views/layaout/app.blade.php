@@ -304,7 +304,11 @@
                         <div
                             class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                             <div class="mb-2 mb-md-0" style="color: #000000;">
-                                © {{ date('Y') }}, Proyecto Salesiano Costa Norte
+                                © {{ date('Y') }}, Proyecto Salesiano Costa Norte |
+                                <a href="https://www.proyectosalesiano.org.ec/" target="_blank"
+                                    style="color: #dc3545; font-weight: 500;">
+                                    quieres conocer mas
+                                </a>
                             </div>
                         </div>
                     </footer>
